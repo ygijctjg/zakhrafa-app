@@ -1,15 +1,24 @@
 {
-  "name": "تطبيق زخرفة النصوص",
+  "name": "Zakhrafa Pro | المزخرف المحترف",
   "short_name": "زخرفة",
-  "start_url": "index.html",
+  "description": "تطبيق لزخرفة النصوص العربية والإنجليزية باحترافية",
+  "start_url": "/zakhrafa-app/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/1159/1159642.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/1159/1159642.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
