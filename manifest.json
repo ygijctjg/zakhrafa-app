@@ -1,12 +1,11 @@
 {
-  "name": "المزخرف المحترف",
+  "name": "المزخرف المحترف PRO",
   "short_name": "زخرفة",
-  "description": "تطبيق زخرفة احترافي 100 خط",
   "start_url": "index.html",
-  "display": "standalone", 
-  "orientation": "portrait",
+  "display": "standalone",
   "background_color": "#0d1117",
   "theme_color": "#58a6ff",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "https://cdn-icons-png.flaticon.com/512/1055/1055666.png",
