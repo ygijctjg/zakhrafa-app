@@ -3,86 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>EREN SYSTEM</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+    <title>EREN OS - GENESIS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     <style>
-        :root { --neon: #00f2ff; --bg: #05050a; }
-        body { background: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; overflow-x: hidden; }
+        :root {
+            --neon: #00f2ff;
+            --purple: #bc13fe;
+            --bg: #020205;
+            --card-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
         
-        /* شاشة اللوجو */
+        body {
+            background: var(--bg);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(188, 19, 254, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 0% 0%, rgba(0, 242, 255, 0.05) 0%, transparent 30%);
+        }
+
+        /* شاشة التحميل السينمائية */
         #splash-screen {
             position: fixed; inset: 0; background: var(--bg);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 99999; transition: opacity 0.5s;
+            z-index: 100000; transition: transform 1s cubic-bezier(1,0,0,1);
         }
-        .logo-container img { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--neon); box-shadow: 0 0 20px var(--neon); }
+        .logo-box { position: relative; width: 150px; height: 150px; }
+        .logo-box img { width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--neon); padding: 5px; box-shadow: 0 0 30px var(--neon); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+
+        /* حاوية النظام */
+        .app-container { max-width: 600px; margin: auto; padding: 30px 20px 120px; position: relative; }
         
-        /* واجهة التطبيق */
-        .app-shell { padding: 20px; max-width: 500px; margin: auto; text-align: center; }
-        .brand-name { font-size: 2.2rem; background: linear-gradient(90deg, #00f2ff, #7000ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333; background: #000; color: white; font-size: 1.2rem; text-align: center; margin: 20px 0; }
+        .header-box { text-align: center; margin-bottom: 40px; }
+        .header-box h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; margin: 0; background: linear-gradient(to right, var(--neon), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 5px; }
+
+        /* منطقة الإدخال الذكية */
+        .input-wrapper { position: relative; margin-bottom: 30px; }
+        input {
+            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(0, 242, 255, 0.2);
+            padding: 20px; border-radius: 20px; color: white; font-size: 1.3rem; text-align: center;
+            backdrop-filter: blur(10px); transition: 0.4s;
+        }
+        input:focus { border-color: var(--neon); box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); background: rgba(0,0,0,0.6); }
+
+        /* شبكة الزخرفة الأسطورية */
+        .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+        .card {
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px; padding: 20px; text-align: center; position: relative;
+            transition: 0.3s; overflow: hidden;
+        }
+        .card:active { transform: scale(0.9); border-color: var(--neon); }
+        .card::after { content: 'اضغط للنسخ'; position: absolute; bottom: 0; left: 0; width: 100%; background: var(--neon); color: black; font-size: 0.6rem; font-weight: 900; padding: 2px 0; transform: translateY(100%); transition: 0.3s; }
+        .card:hover::after { transform: translateY(0); }
         
-        .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-        .card { background: rgba(255,255,255,0.05); border: 1px solid #222; border-radius: 15px; padding: 15px; }
-        .btn-copy { width: 100%; background: #fff; color: #000; border: none; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        
-        .nav-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 80%; background: rgba(20,20,20,0.9); padding: 10px; border-radius: 50px; border: 1px solid #333; display: flex; justify-content: space-around; }
+        .style-label { font-size: 0.5rem; color: var(--purple); font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; text-transform: uppercase; }
+        .result-text { font-size: 1.2rem; font-weight: bold; word-break: break-all; margin-bottom: 10px; }
+
+        /* شريط التحكم السفلي */
+        .control-panel {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 400px; background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px; border-radius: 30px; display: flex; justify-content: space-around; align-items: center;
+        }
+        .ctrl-btn { font-size: 1.5rem; cursor: pointer; filter: grayscale(1); transition: 0.3s; }
+        .ctrl-btn:hover { filter: grayscale(0); transform: scale(1.2); }
+
+        /* إشعار النسخ */
+        #toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--neon); color: black; padding: 10px 25px; border-radius: 50px; font-weight: 900; font-size: 0.8rem; opacity: 0; transition: 0.4s; z-index: 100; }
+
+        @media (max-width: 400px) { .results-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <div id="splash-screen">
-        <div class="logo-container"><img src="logo.png" onerror="this.src='https://via.placeholder.com/120'"></div>
-        <p style="color:var(--neon); letter-spacing: 2px; margin-top:15px;">INITIALIZING...</p>
+        <div class="logo-box"><img src="logo.png" onerror="this.src='https://via.placeholder.com/150/00f2ff/000000?text=EREN'"></div>
+        <h2 style="font-family: 'Orbitron'; letter-spacing: 10px; margin-top: 30px; font-size: 0.8rem;">ENGINE v2.0</h2>
     </div>
 
-    <div class="app-shell">
-        <div class="brand-name">EREN ZAKHRAFA</div>
-        <input type="text" id="userInput" placeholder="اكتب اسمك هنا...">
-        <div id="resultsBox" class="results-grid"></div>
+    <div class="app-container">
+        <div class="header-box">
+            <h1>EREN</h1>
+            <p style="color: #555; font-size: 0.7rem; font-weight: 900;">ULTIMATE DECORATION SYSTEM</p>
+        </div>
+
+        <div class="input-wrapper">
+            <input type="text" id="mainInput" placeholder="أدخل بيانات النص..." maxlength="30">
+        </div>
+
+        <div id="resultsGrid" class="results-grid"></div>
     </div>
 
-    <nav class="nav-bar">
-        <div onclick="location.reload()">🔄</div>
-        <div onclick="window.scrollTo(0,0)">🏠</div>
+    <div id="toast">تم النسخ إلى الذاكرة</div>
+
+    <nav class="control-panel">
+        <div class="ctrl-btn" onclick="location.reload()">🔄</div>
+        <div class="ctrl-btn" onclick="randomize()">🎲</div>
+        <div class="ctrl-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">🔝</div>
     </nav>
 
     <script>
-        // --- كود الطوارئ: إخفاء الشاشة مهما حدث بعد 3 ثوانٍ ---
-        setTimeout(() => {
-            const s = document.getElementById('splash-screen');
-            if(s) s.style.display = 'none';
-        }, 3000);
-
-        const maps = {
+        const fontEngine = {
             bold: { a:'𝐚',b:'𝐛',c:'𝐜',d:'𝐝',e:'𝐞',f:'𝐟',g:'𝐠',h:'𝐡',i:'𝐢',j:'𝐣',k:'𝐤',l:'𝐥',m:'𝐦',n:'𝐧',o:'𝐨',p:'𝐩',q:'𝐪',r:'𝐫',s:'𝐬',t:'𝐭',u:'𝐮',v:'𝐯',w:'𝐰',x:'𝐱',y:'𝐲',z:'𝐳', A:'𝐀',B:'𝐁',C:'𝐂',D:'𝐃',E:'𝐄',F:'𝐅',G:'𝐆',H:'𝐇',I:'𝐈',J:'𝐉',K:'𝐊',L:'𝐋',M:'𝐌',N:'𝐍',O:'𝐎',P:'𝐏',Q:'𝐐',R:'𝐑',S:'𝐒',T:'𝐓',U:'𝐔',V:'𝐕',W:'𝐖',X:'𝐗',Y:'𝐘',Z:'𝐙' },
-            bubble: { a:'ⓐ',b:'ⓑ',c:'ⓒ',d:'ⓓ',e:'ⓔ',f:'ⓕ',g:'ⓖ',h:'ⓗ',i:'ⓘ',j:'ⓙ',k:'ⓚ',l:'ⓛ',m:'ⓜ',n:'ⓝ',o:'ⓞ',p:'ⓟ',q:'ⓠ',r:'ⓡ',s:'ⓢ',t:'ⓣ',u:'ⓤ',v:'ⓥ',w:'ⓦ',x:'ⓧ',y:'ⓨ',z:'ⓩ' }
+            mono: { a:'𝚊',b:'𝚋',c:'𝚌',d:'𝚍',e:'𝚎',f:'𝚏',g:'𝚐',h:'𝚑',i:'𝚒',j:'𝚓',k:'𝚔',l:'𝚕',m:'𝚖',n:'𝚗',o:'𝚘',p:'𝚙',q:'𝚚',r:'𝚛',s:'𝚜',t:'𝚝',u:'𝚞',v:'𝚟',w:'𝚠',x:'𝚡',y:'𝚢',z:'𝚣' },
+            script: { a:'𝒶',b:'𝒷',c:'𝒸',d:'𝒹',e:'𝑒',f:'𝒻',g:'𝑔',h:'𝒽',i:'𝒾',j:'𝒿',k:'𝓀',l:'𝓁',m:'𝓂',n:'𝓃',o:'𝑜',p:'𝓅',q:'𝓆',r:'𝓇',s:'𝓈',t:'𝓉',u:'𝓊',v:'𝓋',w:'𝓌',x:'𝓍',y:'𝓎',z:'𝓏' },
+            double: { a:'𝕒',b:'𝕓',c:'𝕔',d:'𝕕',e:'𝕖',f:'𝕗',g:'𝕘',h:'𝕙',i:'𝕚',j:'𝕛',k:'𝕜',l:'𝕝',m:'𝕞',n:'𝕟',o:'𝕠',p:'𝕡',q:'𝕢',r:'𝕣',s:'𝕤',t:'𝕥',u:'𝕦',v:'𝕧',w:'𝕨',x:'𝕩',y:'𝕪',z:'𝕫' },
+            smallCaps: { a:'ᴀ',b:'ʙ',c:'ᴄ',d:'ᴅ',e:'ᴇ',f:'ꜰ',g:'ɢ',h:'ʜ',i:'ɪ',j:'ᴊ',k:'ᴋ',l:'ʟ',m:'ᴍ',n:'ɴ',o:'ᴏ',p:'ᴘ',q:'ǫ',r:'ʀ',s:'s',t:'ᴛ',u:'ᴜ',v:'ᴠ',w:'ᴡ',x:'x',y:'ʏ',z:'ᴢ' }
         };
-        const decorations = ["꧁ [N] ꧂", "★ [N] ★", "⚔️ [N] ⚔️", "👑 [N] 👑", "🔥 [N] 🔥"];
 
-        document.getElementById('userInput').addEventListener('input', (e) => {
-            const val = e.target.value.trim();
-            const box = document.getElementById('resultsBox');
-            box.innerHTML = '';
-            if(!val) return;
+        const decoPresets = [
+            "꧁ [X] ꧂", "༺ [X] ༻", "⚔️ [X] ⚔️", "👑 [X] 👑", "🔥 [X] 🔥", "⚡ [X] ⚡",
+            "『 [X] 』", "⏤͟͟͞͞ [X]", "𓆩𓇢𓆸 [X]", "⩹ [X] ⩺", "✪ [X] ✪", "〆[X]〆"
+        ];
 
-            const boldVal = val.split('').map(c => maps.bold[c] || c).join('');
-            
-            // إضافة الخطوط والزخارف
-            decorations.forEach(d => {
-                const res = d.replace('[N]', boldVal);
-                const div = document.createElement('div');
-                div.className = 'card';
-                div.innerHTML = `<div>${res}</div><button class="btn-copy" onclick="copyText('${res}', this)">نسخ</button>`;
-                box.appendChild(div);
+        const randomDecor = ["๛", "々", "〆", "个", "乡", "〄", "⑇", "×", "ᝄ", "⚚", "❂", "☣️"];
+
+        function transform(text, type) {
+            return text.split('').map(char => fontEngine[type][char.toLowerCase()] || char).join('');
+        }
+
+        function render() {
+            const input = document.getElementById('mainInput').value.trim();
+            const grid = document.getElementById('resultsGrid');
+            grid.innerHTML = '';
+            if(!input) return;
+
+            // توليد الخطوط الخام
+            Object.keys(fontEngine).forEach(key => {
+                createCard(transform(input, key), key);
             });
+
+            // توليد الزخارف
+            const boldBase = transform(input, 'bold');
+            decoPresets.forEach(p => {
+                createCard(p.replace('[X]', boldBase), 'STYLE');
+            });
+        }
+
+        function createCard(text, label) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `<div class="style-label">${label}</div><div class="result-text">${text}</div>`;
+            card.onclick = () => copy(text);
+            document.getElementById('resultsGrid').appendChild(card);
+        }
+
+        function copy(text) {
+            navigator.clipboard.writeText(text);
+            const t = document.getElementById('toast');
+            t.style.opacity = '1';
+            setTimeout(() => t.style.opacity = '0', 1500);
+            if(window.navigator.vibrate) window.navigator.vibrate(50);
+        }
+
+        function randomize() {
+            const input = document.getElementById('mainInput');
+            if(!input.value) return;
+            const r = randomDecor[Math.floor(Math.random() * randomDecor.length)];
+            input.value = r + " " + input.value + " " + r;
+            render();
+        }
+
+        // إغلاق شاشة الترحيب
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('splash-screen').style.transform = 'translateY(-100%)';
+            }, 2500);
         });
 
-        function copyText(t, b) {
-            navigator.clipboard.writeText(t);
-            b.innerText = "تم ✅";
-            setTimeout(() => b.innerText = "نسخ", 1000);
-        }
+        document.getElementById('mainInput').addEventListener('input', render);
     </script>
 </body>
 </html>
