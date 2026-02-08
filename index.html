@@ -2,31 +2,36 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#58a6ff">
-    <title>المزخرف المحترف PRO</title>
+    <meta name="theme-color" content="#1a0a2e"> <title>Eren Zakhrafa | مزخرف احترافي</title>
     
-    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+<div class="background-particles">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+</div>
+
 <div class="container">
     <header>
-        <h1>ZAKHRAFA <span>PRO</span></h1>
-        <p>تطبيق الزخرفة المستقل - 100+ خط</p>
+        <h1>Eren <span>ZAKHRAFA</span></h1>
+        <p>مُولد خطوط فريد ومؤثرات بصرية ساحرة</p>
     </header>
 
-    <div class="input-section">
-        <input type="text" id="userInput" placeholder="اكتب اسمك هنا (مثال: AMIR)...">
+    <div class="input-section glow-border">
+        <input type="text" id="userInput" placeholder="اكتب اسمك هنا (مثال: EREN YEAGER)..." spellcheck="false">
     </div>
 
-    <div class="dev-section">
+    <div class="dev-section glow-border">
+        <h3>✨ صانع الزخارف المخصصة</h3>
         <div class="add-group">
-            <input type="text" id="customTemplate" placeholder="صمم قالبك الخاص: ꧁ [نص] ꧂">
+            <input type="text" id="customTemplate" placeholder="مثال: 『🔥 [نص] 🔥』">
             <button onclick="addNewTemplate()">إضافة</button>
         </div>
     </div>
@@ -35,11 +40,5 @@
 </div>
 
 <script src="script.js"></script>
-<script>
-    // تفعيل الخدمة ليعمل كـ تطبيق مستقل
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js');
-    }
-</script>
 </body>
 </html>
