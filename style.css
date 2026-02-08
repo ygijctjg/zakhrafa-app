@@ -1,64 +1,17 @@
-:root {
-    --primary: #00f2fe;
-    --accent: #4facfe;
-    --bg: #0a0a0b;
-    --card: #161b22;
+{
+  "name": "المزخرف المحترف PRO",
+  "short_name": "زخرفة",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#58a6ff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/1055/1055666.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
-
-body {
-    font-family: 'Tajawal', sans-serif;
-    background-color: var(--bg);
-    color: white;
-    margin: 0; padding: 15px;
-    direction: rtl;
-}
-
-.container { max-width: 500px; margin: auto; }
-
-h1 span { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-
-.main-input-card input, .input-group input {
-    width: 100%;
-    padding: 15px;
-    border-radius: 12px;
-    border: 2px solid #30363d;
-    background: #0d1117;
-    color: white;
-    font-size: 1.1rem;
-    box-sizing: border-box;
-}
-
-.dev-box {
-    background: var(--card);
-    padding: 15px;
-    border-radius: 15px;
-    margin: 20px 0;
-    border: 1px dashed var(--primary);
-}
-
-.input-group { display: flex; gap: 10px; margin-top: 10px; }
-
-button {
-    padding: 10px 20px;
-    background: linear-gradient(45deg, var(--primary), var(--accent));
-    border: none;
-    border-radius: 8px;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.card {
-    background: var(--card);
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #30363d;
-}
-
-.copy-btn { background: #238636; color: white; }
-
-.del-btn { background: #da3633; color: white; margin-left: 5px; }
