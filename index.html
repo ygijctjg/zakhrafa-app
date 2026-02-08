@@ -3,47 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Eren Zakhrafa PRO</title>
+    <title>EREN OS - Zakhrafa</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div id="splash-screen">
-        <div class="splash-content">
-            <div class="logo-circle pulsing">
-                <img src="logo.png" alt="Eren Logo">
-            </div>
-            <h1 class="neon-text">EREN <span>ZAKHRAFA</span></h1>
-            <div class="loading-bar"><div class="progress"></div></div>
+        <div class="logo-container">
+            <img src="logo.png" alt="EREN">
         </div>
+        <div class="loader-text">INITIALIZING SYSTEM...</div>
     </div>
 
-    <div class="container" id="main-app">
+    <div class="app-shell">
         <header>
-            <h1 class="logo-text">Eren <span>ZAKHRAFA</span></h1>
-            <p>مرحباً بك يا إيرين يغير</p>
+            <div class="brand-name">EREN ZAKHRAFA</div>
+            <p class="subtitle">مرحباً بك يا إيرين يغير v2.0</p>
         </header>
 
-        <div class="main-card glow">
-            <label>INPUT TEXT</label>
-            <input type="text" id="userInput" placeholder="اكتب اسمك هنا..." autocomplete="off">
+        <div class="glass-card">
+            <div class="input-group">
+                <label>ENGINE INPUT</label>
+                <input type="text" id="userInput" placeholder="أدخل اسمك هنا..." autocomplete="off">
+            </div>
         </div>
 
-        <div class="quick-add-box">
-            <input type="text" id="customTemplate" placeholder="قالبك الخاص.. مثال: ⚡ [نص] ⚡">
-            <button onclick="addNewTemplate()">إضافة</button>
-        </div>
-
-        <div id="favoritesSection" class="section-box" style="display: none;">
-            <h3 class="section-title">❤️ المحفوظات</h3>
+        <div id="favoritesSection" class="hidden-section">
+            <p class="section-tag purple">MY FAVORITES ❤️</p>
             <div id="favoritesBox" class="results-grid"></div>
-            <hr class="divider">
         </div>
 
-        <h3 class="section-title">✨ الزخارف المتاحة</h3>
+        <p class="section-tag cyan">GENERATED STYLES ✨</p>
         <div id="resultsBox" class="results-grid"></div>
     </div>
+
+    <nav class="nav-bar">
+        <div class="nav-item" onclick="window.scrollTo({top:0, behavior:'smooth'})">🏠</div>
+        <div class="nav-item" onclick="resetInput()">🔄</div>
+        <div class="nav-item" onclick="alert('EREN ZAKHRAFA PRO v2.0')">ℹ️</div>
+    </nav>
 
     <script src="script.js"></script>
 </body>
