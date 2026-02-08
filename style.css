@@ -1,17 +1,53 @@
-{
-  "name": "المزخرف المحترف PRO",
-  "short_name": "زخرفة",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#0d1117",
-  "theme_color": "#58a6ff",
-  "orientation": "portrait",
-  "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/1055/1055666.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
+:root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --primary: #58a6ff;
+    --text: #c9d1d9;
 }
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0; padding: 20px;
+    direction: rtl;
+    -webkit-user-select: none; /* منع تحديد الواجهة لتبدو كتطبيق */
+}
+
+.container { max-width: 600px; margin: auto; }
+
+input {
+    width: 100%;
+    padding: 15px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    -webkit-user-select: text;
+}
+
+.card {
+    background: var(--card);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #30363d;
+}
+
+.info div {
+    font-size: 1.2rem;
+    -webkit-user-select: text; /* السماح بنسخ الزخرفة فقط */
+}
+
+button {
+    background: var(--primary);
+    border: none; padding: 10px 20px;
+    border-radius: 8px; font-weight: bold; cursor: pointer;
+}
+
+.results-container { margin-top: 20px; }
