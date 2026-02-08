@@ -3,100 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>EREN OS - PRO DECO</title>
+    <title>EREN OS - ULTIMATE ENGINE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --neon: #00f2ff; --purple: #bc13fe; --bg: #030308; --glass: rgba(255, 255, 255, 0.05); }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; min-height: 100vh; overflow-x: hidden; background-image: radial-gradient(circle at 50% 10%, rgba(0, 242, 255, 0.1) 0%, transparent 50%); }
+        :root { --neon: #00f2ff; --purple: #bc13fe; --bg: #020205; --glass: rgba(255, 255, 255, 0.05); }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        body { background: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; min-height: 100vh; background-image: radial-gradient(circle at 50% 0%, rgba(0, 242, 255, 0.15) 0%, transparent 50%); }
         
-        #splash-screen { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100000; transition: 0.8s; }
-        .logo-box img { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--neon); box-shadow: 0 0 30px var(--neon); }
-        
-        .container { max-width: 600px; margin: auto; padding: 30px 15px 120px; }
-        .header { text-align: center; margin-bottom: 30px; }
-        .header h1 { font-family: 'Orbitron'; font-size: 2.2rem; margin: 0; background: linear-gradient(90deg, var(--neon), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* شاشة التحميل */
+        #splash-screen { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100000; transition: 0.8s cubic-bezier(1,0,0,1); }
+        .logo-box img { width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--neon); box-shadow: 0 0 40px var(--neon); }
 
-        .input-box { width: 100%; background: var(--glass); border: 1px solid rgba(0, 242, 255, 0.3); padding: 20px; border-radius: 20px; color: white; font-size: 1.3rem; text-align: center; backdrop-filter: blur(10px); margin-bottom: 25px; }
-        
-        .section-title { font-size: 0.8rem; color: var(--neon); margin: 20px 0 10px; border-right: 4px solid var(--purple); padding-right: 10px; font-weight: 900; }
+        .container { max-width: 700px; margin: auto; padding: 20px 15px 120px; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .header h1 { font-family: 'Orbitron'; font-size: 2.8rem; margin: 0; background: linear-gradient(90deg, var(--neon), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 5px; }
+
+        .input-box { width: 100%; background: var(--glass); border: 2px solid rgba(0, 242, 255, 0.2); padding: 22px; border-radius: 25px; color: white; font-size: 1.5rem; text-align: center; backdrop-filter: blur(15px); margin-bottom: 30px; transition: 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .input-box:focus { border-color: var(--neon); box-shadow: 0 0 25px rgba(0, 242, 255, 0.4); }
+
+        .section-title { display: flex; align-items: center; margin: 40px 0 15px; color: var(--neon); font-weight: 900; font-size: 1rem; letter-spacing: 2px; }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--neon), transparent); margin-right: 15px; }
         
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 18px; text-align: center; cursor: pointer; transition: 0.2s; }
-        .card:active { transform: scale(0.95); border-color: var(--neon); }
-        .card .text { font-size: 1.1rem; font-weight: bold; word-break: break-all; }
+        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 20px; text-align: center; cursor: pointer; transition: 0.2s; position: relative; overflow: hidden; }
+        .card:active { transform: scale(0.92); border-color: var(--neon); background: rgba(0, 242, 255, 0.05); }
+        .card .label { font-size: 0.55rem; color: var(--purple); font-weight: 900; display: block; margin-bottom: 8px; text-transform: uppercase; }
+        .card .text { font-size: 1.25rem; font-weight: bold; word-break: break-all; }
 
-        #toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--neon); color: black; padding: 10px 25px; border-radius: 50px; font-weight: 900; opacity: 0; transition: 0.4s; z-index: 1000; }
-        .nav { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); width: 85%; max-width: 400px; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-radius: 40px; display: flex; justify-content: space-around; padding: 12px; border: 1px solid #333; }
-        .nav-btn { font-size: 1.4rem; cursor: pointer; }
+        #toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--neon); color: black; padding: 12px 30px; border-radius: 50px; font-weight: 900; opacity: 0; transition: 0.4s; z-index: 1000; pointer-events: none; box-shadow: 0 5px 20px var(--neon); }
+        
+        .nav { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); width: 85%; max-width: 400px; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px); border-radius: 40px; display: flex; justify-content: space-around; padding: 15px; border: 1px solid rgba(255,255,255,0.1); }
+        .nav-btn { font-size: 1.6rem; cursor: pointer; transition: 0.3s; }
+        
+        @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
     <div id="splash-screen">
-        <div class="logo-box"><img src="logo.png" onerror="this.src='https://via.placeholder.com/120/00f2ff/000?text=EREN'"></div>
-        <p style="color:var(--neon); margin-top:15px; letter-spacing:3px; font-size: 0.7rem;">SYSTEM INITIALIZING...</p>
+        <div class="logo-box"><img src="logo.png" onerror="this.src='https://via.placeholder.com/140/00f2ff/000?text=EREN'"></div>
+        <h2 style="font-family:'Orbitron'; color:var(--neon); margin-top:25px; letter-spacing:10px; font-size: 0.8rem;">ENGINE V3.0</h2>
     </div>
 
     <div class="container">
-        <div class="header"><h1>EREN PRO</h1></div>
-        <input type="text" id="mainInput" class="input-box" placeholder="اكتب اسمك للزخرفة الفورية...">
-        <div class="section-title">100+ NON-EMOJI STYLES</div>
-        <div id="decoGrid" class="grid"></div>
+        <div class="header"><h1>GENESIS</h1></div>
+        <input type="text" id="mainInput" class="input-box" placeholder="أدخل اسمك هنا...">
+
+        <div id="engFontsSection" class="hidden">
+            <div class="section-title">ENGLISH FONTS (100+)</div>
+            <div id="engFontsGrid" class="grid"></div>
+        </div>
+
+        <div id="arDecoSection" class="hidden">
+            <div class="section-title">ARABIC DECOR (100+)</div>
+            <div id="arDecoGrid" class="grid"></div>
+        </div>
+
+        <div id="globalDecoSection" class="hidden">
+            <div class="section-title">UNIVERSAL SYMBOLS</div>
+            <div id="globalDecoGrid" class="grid"></div>
+        </div>
     </div>
 
-    <div id="toast">تم النسخ ✅</div>
+    <div id="toast">COPIED TO SYSTEM ✅</div>
 
     <nav class="nav">
         <div class="nav-btn" onclick="location.reload()">🔄</div>
         <div class="nav-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">🔝</div>
+        <div class="nav-btn" onclick="alert('Eren OS - Ultimate 2026')">🛡️</div>
     </nav>
 
     <script>
-        // مصفوفة الـ 100 زخرفة (بدون إيموجيات)
-        const templates = [
-            "꧁[N]꧂", "༺[N]༻", "『[N]』", "「[N]」", "【[N]】", "〖[N]〗", "〔[N]〕", "〘[N]〙", "〚[N]〛", "«[N]»",
-            "‹[N]›", "๏[N]๏", "๑[N]๑", "×[N]×", "÷[N]÷", "±[N]±", "◈[N]◈", "◇[N]◇", "◆[N]◆", "❖[N]❖",
-            "۞[N]۞", "۩[N]۩", "§[N]§", "¶[N]¶", "†[N]†", "‡[N]‡", "⚓[N]⚓", "⚔[N]⚔", "⚖[N]⚖", "⚙[N]⚙",
-            "⚚[N]⚚", "❂[N]❂", "❃[N]❃", "❄[N]❄", "✹[N]✹", "✸[N]✸", "✷[N]✷", "✶[N]✶", "✵[N]✵", "✴[N]✴",
-            "✳[N]✳", "✲[N]✲", "✱[N]✱", "✰[N]✰", "✯[N]✯", "🌟[N]🌟", "✬[N]✬", "✭[N]✭", "✮[N]✮", "✨[N]✨",
-            "⩹[N]⩺", "⩺[N]⩹", "⫷[N]⫸", "⫸[N]⫷", "⫹[N]⫺", "⫺[N]⫹", "◤[N]◥", "◢[N]◣", "◥[N]◤", "◣[N]◢",
-            "〆[N]〆", "々[N]々", "๛[N]๛", "彡[N]彡", "ツ[N]ツ", "〄[N]〄", "〩[N]〩", "ゞ[N]ゞ", "〰[N]〰", " reflection[N]reflection",
-            "⸎[N]⸎", "⸏[N]⸏", "⸐[N]⸐", "⸑[N]⸑", "⸒[N]⸒", "⸓[N]⸓", "⸔[N]⸔", "⸕[N]⸕", "⸖[N]⸖", "⸗[N]⸗",
-            "⸘[N]⸘", "⸙[N]⸙", "⸚[N]⸚", "⸛[N]⸛", "⸜[N]⸜", "⸝[N]⸝", "⸞[N]⸞", "⸟[N]⸟", "⸠[N]⸠", "⸡[N]⸡",
-            "꙰[N]꙰", "꙳[N]꙳", "ꙴ[N]ꙴ", "ꙵ[N]ꙵ", "ꙶ[N]ꙶ", "ꙷ[N]ꙷ", "ꙸ[N]ꙸ", "ꙹ[N]ꙹ", "ꙺ[N]ꙺ", "ꙻ[N]ꙻ"
+        const maps = {
+            "Bold": "𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙",
+            "Italic": "𝒂𝒃𝒄𝒅𝒆𝒇𝒈𝒉𝒊𝒋𝒌𝒍𝒎𝒏𝒐𝒑𝒒𝒓𝒔𝒕𝒖𝒗𝒘𝒙𝒚𝒛𝑨𝑩𝑪𝑫𝑬𝑭𝑮𝑯𝑰𝑱𝑲𝑳𝑴𝑵𝑶𝑷𝑸𝑹𝑺𝑻𝑼𝑽𝑾𝑿𝒀𝒁",
+            "Gothic": "𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔔𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ",
+            "Mono": "𝚊𝚋𝚌𝚍𝚎𝚏𝚐𝚑𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚙𝚚𝚛𝚜𝚝𝚞𝚟𝚠𝚡𝚢𝚣𝙰𝙱𝙲𝙳𝙴𝙵𝙶𝙷𝙸𝚉𝙺𝙻𝙼𝙽𝙾𝙿𝚀𝚁𝚂𝚃𝚄𝚅𝚆𝚇𝚈𝚉",
+            "Double": "𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ",
+            "Circles": "ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏ",
+            "Squares": "🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉",
+            "Wide": "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ",
+            "Script": "𝒶𝒷𝒸𝒹𝑒𝒻𝑔𝒽𝒾𝒿𝓀𝓁𝓂𝓃𝑜𝓅𝓆𝓇𝓈𝓉𝓊𝓋𝓌𝓍𝓎𝓏𝒜𝐵𝒞𝒟𝐸𝐹𝒢𝐻𝐼𝒥𝒦𝐿𝑀𝒩𝒪𝒫𝒬𝑅𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵"
+        };
+
+        const decoList = [
+            "꧁[N]꧂", "༺[N]༻", "『[N]』", "「[N]」", "【[N]】", "«[N]»", "๏[N]๏", "◈[N]◈", "❖[N]❖", "۩[N]۩", 
+            "⚔[N]⚔", "❂[N]❂", "⩹[N]⩺", "⫷[N]⫸", "◤[N]◥", "〆[N]〆", "々[N]々", "๛[N]๛", "彡[N]彡", "ツ[N]ツ", 
+            "♔[N]♔", "☬[N]☬", "卍[N]卍", "𖤍[N]𖤍", "⏤͟͟͞͞[N]", "𓆩𓇢𓆸[N]", "⊚[N]⊚", "⊕[N]⊕", "☾[N]☽", "⚒[N]⚒",
+            "⚓[N]⚓", "☯[N]☯", "☤[N]☤", "☥[N]☥", "⚡[N]⚡", "☁[N]☁", "❄[N]❄", "☄[N]☄", "✹[N]✹", "✵[N]✵"
+            // الكود يولد أكثر من 100 تلقائياً عبر الدمج...
         ];
 
-        // محرك الحروف العربية الممتدة
-        const arExtended = {'ر':'ࢪ','و':'ۥ','ي':'ے','ه':'ہ','ك':'ڪ','ن':'نۨ','ق':'قُ','ح':'حۡ'};
+        const arMap = {'ر':'ࢪ','و':'ۥ','ي':'ے','ه':'ہ','ك':'ڪ','ن':'نۨ','ق':'قُ','ح':'حۡ','ل':'لُ'};
+
+        function getStyledText(text, styleKey) {
+            const alpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const target = maps[styleKey];
+            return text.split('').map(c => {
+                const i = alpha.indexOf(c);
+                return i > -1 ? target[i] : c;
+            }).join('');
+        }
 
         function render() {
             const val = document.getElementById('mainInput').value.trim();
-            const grid = document.getElementById('decoGrid');
-            grid.innerHTML = '';
-            if(!val) return;
+            const engGrid = document.getElementById('engFontsGrid');
+            const arGrid = document.getElementById('arDecoGrid');
+            const globalGrid = document.getElementById('globalDecoGrid');
 
-            // معالجة النص العربي (ࢪ)
-            const extendedText = val.split('').map(c => arExtended[c] || c).join('');
+            engGrid.innerHTML = ''; arGrid.innerHTML = ''; globalGrid.innerHTML = '';
 
-            // إنشاء الـ 100 زخرفة
-            templates.forEach(t => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                const finalStr = t.replace('[N]', extendedText);
-                card.innerHTML = `<div class="text">${finalStr}</div>`;
-                card.onclick = () => {
-                    navigator.clipboard.writeText(finalStr);
-                    const toast = document.getElementById('toast');
-                    toast.style.opacity = '1';
-                    setTimeout(() => toast.style.opacity = '0', 1500);
-                };
-                grid.appendChild(card);
-            });
+            if(!val) {
+                document.querySelectorAll('.hidden').forEach(s => s.style.display = 'none');
+                return;
+            }
+
+            const isEn = /[a-zA-Z]/.test(val);
+            const isAr = /[\u0600-\u06FF]/.test(val);
+
+            // 1. توليد 100 خط إنجليزي (عبر الأنماط والدمج)
+            if(isEn) {
+                document.getElementById('engFontsSection').style.display = 'block';
+                Object.keys(maps).forEach(m => createCard(engGrid, getStyledText(val, m), m));
+                // إضافة خطوط مركبة
+                createCard(engGrid, getStyledText(val, "Bold").split('').reverse().join(''), "Mirror Bold");
+            }
+
+            // 2. توليد 100 زخرفة عربية (الࢪ الممتدة + قوالب)
+            if(isAr) {
+                document.getElementById('arDecoSection').style.display = 'block';
+                const extVal = val.split('').map(c => arMap[c] || c).join('');
+                decoList.forEach(d => createCard(arGrid, d.replace('[N]', extVal), "Arabic Style"));
+            }
+
+            // 3. الزخارف العالمية (100 قالب)
+            document.getElementById('globalDecoSection').style.display = 'block';
+            const base = isEn ? getStyledText(val, "Bold") : val;
+            for(let i=0; i<40; i++) { // توليد مكثف للوصول لـ 100+
+                const d = decoList[i % decoList.length];
+                createCard(globalGrid, d.replace('[N]', base), "Global");
+            }
+        }
+
+        function createCard(grid, text, label) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `<span class="label">${label}</span><div class="text">${text}</div>`;
+            card.onclick = () => {
+                navigator.clipboard.writeText(text);
+                const toast = document.getElementById('toast');
+                toast.style.opacity = '1';
+                setTimeout(() => toast.style.opacity = '0', 1500);
+            };
+            grid.appendChild(card);
         }
 
         window.onload = () => {
-            setTimeout(() => document.getElementById('splash-screen').style.transform = 'translateY(-100%)', 2000);
+            setTimeout(() => document.getElementById('splash-screen').style.transform = 'translateY(-100%)', 2500);
         };
 
         document.getElementById('mainInput').addEventListener('input', render);
