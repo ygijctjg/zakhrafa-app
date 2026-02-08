@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>EREN OS - GENESIS</title>
+    <title>EREN OS - ULTIMATE ENGINE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --neon: #00f2ff;
             --purple: #bc13fe;
-            --bg: #020205;
-            --card-bg: rgba(255, 255, 255, 0.03);
+            --bg: #030308;
+            --glass: rgba(255, 255, 255, 0.05);
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
             background: var(--bg);
@@ -23,161 +23,166 @@
             min-height: 100vh;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 50% 50%, rgba(188, 19, 254, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 0% 0%, rgba(0, 242, 255, 0.05) 0%, transparent 30%);
+                radial-gradient(circle at 50% 10%, rgba(0, 242, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 90%, rgba(188, 19, 254, 0.1) 0%, transparent 50%);
         }
 
-        /* شاشة التحميل السينمائية */
+        /* شاشة البداية */
         #splash-screen {
             position: fixed; inset: 0; background: var(--bg);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 100000; transition: transform 1s cubic-bezier(1,0,0,1);
+            z-index: 100000; transition: 0.8s cubic-bezier(1,0,0,1);
         }
-        .logo-box { position: relative; width: 150px; height: 150px; }
-        .logo-box img { width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--neon); padding: 5px; box-shadow: 0 0 30px var(--neon); animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+        .logo-box img { width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--neon); box-shadow: 0 0 40px var(--neon); }
 
-        /* حاوية النظام */
-        .app-container { max-width: 600px; margin: auto; padding: 30px 20px 120px; position: relative; }
+        /* الواجهة الرئيسية */
+        .container { max-width: 600px; margin: auto; padding: 40px 20px 120px; }
         
-        .header-box { text-align: center; margin-bottom: 40px; }
-        .header-box h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; margin: 0; background: linear-gradient(to right, var(--neon), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 5px; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-family: 'Orbitron'; font-size: 2.8rem; margin: 0; letter-spacing: 8px; background: linear-gradient(90deg, var(--neon), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* منطقة الإدخال الذكية */
-        .input-wrapper { position: relative; margin-bottom: 30px; }
-        input {
-            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(0, 242, 255, 0.2);
-            padding: 20px; border-radius: 20px; color: white; font-size: 1.3rem; text-align: center;
-            backdrop-filter: blur(10px); transition: 0.4s;
+        /* منطقة الإدخال */
+        .input-box {
+            width: 100%; background: var(--glass); border: 1px solid rgba(0, 242, 255, 0.3);
+            padding: 22px; border-radius: 25px; color: white; font-size: 1.4rem; text-align: center;
+            backdrop-filter: blur(15px); transition: 0.3s; margin-bottom: 30px;
         }
-        input:focus { border-color: var(--neon); box-shadow: 0 0 20px rgba(0, 242, 255, 0.3); background: rgba(0,0,0,0.6); }
+        .input-box:focus { border-color: var(--neon); box-shadow: 0 0 25px rgba(0, 242, 255, 0.4); outline: none; }
 
-        /* شبكة الزخرفة الأسطورية */
-        .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+        /* تصنيفات النتائج */
+        .section-title { font-size: 0.8rem; letter-spacing: 2px; color: var(--neon); margin: 25px 0 15px; font-weight: 900; text-transform: uppercase; border-right: 4px solid var(--purple); padding-right: 10px; }
+
+        /* شبكة النتائج */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 15px; }
         .card {
-            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px; padding: 20px; text-align: center; position: relative;
-            transition: 0.3s; overflow: hidden;
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 22px; padding: 20px; text-align: center; cursor: pointer;
+            transition: 0.2s; position: relative; overflow: hidden;
         }
-        .card:active { transform: scale(0.9); border-color: var(--neon); }
-        .card::after { content: 'اضغط للنسخ'; position: absolute; bottom: 0; left: 0; width: 100%; background: var(--neon); color: black; font-size: 0.6rem; font-weight: 900; padding: 2px 0; transform: translateY(100%); transition: 0.3s; }
-        .card:hover::after { transform: translateY(0); }
-        
-        .style-label { font-size: 0.5rem; color: var(--purple); font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; text-transform: uppercase; }
-        .result-text { font-size: 1.2rem; font-weight: bold; word-break: break-all; margin-bottom: 10px; }
-
-        /* شريط التحكم السفلي */
-        .control-panel {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px; background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1);
-            padding: 15px; border-radius: 30px; display: flex; justify-content: space-around; align-items: center;
-        }
-        .ctrl-btn { font-size: 1.5rem; cursor: pointer; filter: grayscale(1); transition: 0.3s; }
-        .ctrl-btn:hover { filter: grayscale(0); transform: scale(1.2); }
+        .card:active { transform: scale(0.92); border-color: var(--neon); }
+        .card .label { font-size: 0.5rem; opacity: 0.5; margin-bottom: 10px; display: block; }
+        .card .text { font-size: 1.2rem; font-weight: bold; word-break: break-all; }
 
         /* إشعار النسخ */
-        #toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--neon); color: black; padding: 10px 25px; border-radius: 50px; font-weight: 900; font-size: 0.8rem; opacity: 0; transition: 0.4s; z-index: 100; }
+        #toast { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%); background: var(--neon); color: black; padding: 12px 30px; border-radius: 50px; font-weight: 900; opacity: 0; transition: 0.4s; z-index: 1000; pointer-events: none; }
 
-        @media (max-width: 400px) { .results-grid { grid-template-columns: 1fr; } }
+        /* التنقل السفلي */
+        .nav { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; display: flex; justify-content: space-around; padding: 15px; }
+        .nav-btn { font-size: 1.6rem; cursor: pointer; transition: 0.3s; }
+
+        @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <div id="splash-screen">
-        <div class="logo-box"><img src="logo.png" onerror="this.src='https://via.placeholder.com/150/00f2ff/000000?text=EREN'"></div>
-        <h2 style="font-family: 'Orbitron'; letter-spacing: 10px; margin-top: 30px; font-size: 0.8rem;">ENGINE v2.0</h2>
+        <div class="logo-box"><img src="logo.png" onerror="this.src='https://via.placeholder.com/150/00f2ff/000?text=EREN'"></div>
+        <h2 style="font-family:'Orbitron'; color:var(--neon); margin-top:20px; letter-spacing:5px;">EREN OS LOADED</h2>
     </div>
 
-    <div class="app-container">
-        <div class="header-box">
-            <h1>EREN</h1>
-            <p style="color: #555; font-size: 0.7rem; font-weight: 900;">ULTIMATE DECORATION SYSTEM</p>
+    <div class="container">
+        <div class="header">
+            <h1>GENESIS</h1>
+            <p style="color:#444; font-weight:900; font-size:0.7rem;">GLOBAL DECORATION SYSTEM v3.0</p>
         </div>
 
-        <div class="input-wrapper">
-            <input type="text" id="mainInput" placeholder="أدخل بيانات النص..." maxlength="30">
-        </div>
+        <input type="text" id="mainInput" class="input-box" placeholder="اكتب اسمك هنا (Ar/En)...">
 
-        <div id="resultsGrid" class="results-grid"></div>
+        <div id="engSection" class="hidden"><div class="section-title">English Styles</div><div id="engGrid" class="grid"></div></div>
+        <div id="arSection" class="hidden"><div class="section-title">Arabic Styles</div><div id="arGrid" class="grid"></div></div>
+        <div class="section-title">Luxury Decorations</div>
+        <div id="decoGrid" class="grid"></div>
     </div>
 
-    <div id="toast">تم النسخ إلى الذاكرة</div>
+    <div id="toast">تم النسخ بنجاح ✅</div>
 
-    <nav class="control-panel">
-        <div class="ctrl-btn" onclick="location.reload()">🔄</div>
-        <div class="ctrl-btn" onclick="randomize()">🎲</div>
-        <div class="ctrl-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">🔝</div>
+    <nav class="nav">
+        <div class="nav-btn" onclick="location.reload()">🔄</div>
+        <div class="nav-btn" onclick="randomDecor()">✨</div>
+        <div class="nav-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">🔝</div>
     </nav>
 
     <script>
-        const fontEngine = {
-            bold: { a:'𝐚',b:'𝐛',c:'𝐜',d:'𝐝',e:'𝐞',f:'𝐟',g:'𝐠',h:'𝐡',i:'𝐢',j:'𝐣',k:'𝐤',l:'𝐥',m:'𝐦',n:'𝐧',o:'𝐨',p:'𝐩',q:'𝐪',r:'𝐫',s:'𝐬',t:'𝐭',u:'𝐮',v:'𝐯',w:'𝐰',x:'𝐱',y:'𝐲',z:'𝐳', A:'𝐀',B:'𝐁',C:'𝐂',D:'𝐃',E:'𝐄',F:'𝐅',G:'𝐆',H:'𝐇',I:'𝐈',J:'𝐉',K:'𝐊',L:'𝐋',M:'𝐌',N:'𝐍',O:'𝐎',P:'𝐏',Q:'𝐐',R:'𝐑',S:'𝐒',T:'𝐓',U:'𝐔',V:'𝐕',W:'𝐖',X:'𝐗',Y:'𝐘',Z:'𝐙' },
-            mono: { a:'𝚊',b:'𝚋',c:'𝚌',d:'𝚍',e:'𝚎',f:'𝚏',g:'𝚐',h:'𝚑',i:'𝚒',j:'𝚓',k:'𝚔',l:'𝚕',m:'𝚖',n:'𝚗',o:'𝚘',p:'𝚙',q:'𝚚',r:'𝚛',s:'𝚜',t:'𝚝',u:'𝚞',v:'𝚟',w:'𝚠',x:'𝚡',y:'𝚢',z:'𝚣' },
-            script: { a:'𝒶',b:'𝒷',c:'𝒸',d:'𝒹',e:'𝑒',f:'𝒻',g:'𝑔',h:'𝒽',i:'𝒾',j:'𝒿',k:'𝓀',l:'𝓁',m:'𝓂',n:'𝓃',o:'𝑜',p:'𝓅',q:'𝓆',r:'𝓇',s:'𝓈',t:'𝓉',u:'𝓊',v:'𝓋',w:'𝓌',x:'𝓍',y:'𝓎',z:'𝓏' },
-            double: { a:'𝕒',b:'𝕓',c:'𝕔',d:'𝕕',e:'𝕖',f:'𝕗',g:'𝕘',h:'𝕙',i:'𝕚',j:'𝕛',k:'𝕜',l:'𝕝',m:'𝕞',n:'𝕟',o:'𝕠',p:'𝕡',q:'𝕢',r:'𝕣',s:'𝕤',t:'𝕥',u:'𝕦',v:'𝕧',w:'𝕨',x:'𝕩',y:'𝕪',z:'𝕫' },
-            smallCaps: { a:'ᴀ',b:'ʙ',c:'ᴄ',d:'ᴅ',e:'ᴇ',f:'ꜰ',g:'ɢ',h:'ʜ',i:'ɪ',j:'ᴊ',k:'ᴋ',l:'ʟ',m:'ᴍ',n:'ɴ',o:'ᴏ',p:'ᴘ',q:'ǫ',r:'ʀ',s:'s',t:'ᴛ',u:'ᴜ',v:'ᴠ',w:'ᴡ',x:'x',y:'ʏ',z:'ᴢ' }
+        const enMaps = {
+            "Bold": { a:'𝐚',b:'𝐛',c:'𝐜',d:'𝐝',e:'𝐞',f:'𝐟',g:'𝐠',h:'𝐡',i:'𝐢',j:'𝐣',k:'𝐤',l:'𝐥',m:'𝐦',n:'𝐧',o:'𝐨',p:'𝐩',q:'𝐪',r:'𝐫',s:'𝐬',t:'𝐭',u:'𝐮',v:'𝐯',w:'𝐰',x:'𝐱',y:'𝐲',z:'𝐳', A:'𝐀',B:'𝐁',C:'𝐂',D:'𝐃',E:'𝐄',F:'𝐅',G:'𝐆',H:'𝐇',I:'𝐈',J:'𝐉',K:'𝐊',L:'𝐋',M:'𝐌',N:'𝐍',O:'𝐎',P:'𝐏',Q:'𝐐',R:'𝐑',S:'𝐒',T:'𝐓',U:'𝐔',V:'𝐕',W:'𝐖',X:'𝐗',Y:'𝐘',Z:'𝐙' },
+            "Bubble": { a:'ⓐ',b:'ⓑ',c:'ⓒ',d:'ⓓ',e:'ⓔ',f:'ⓕ',g:'ⓖ',h:'ⓗ',i:'ⓘ',j:'ⓙ',k:'ⓚ',l:'ⓛ',m:'ⓜ',n:'ⓝ',o:'ⓞ',p:'ⓟ',q:'ⓠ',r:'ⓡ',s:'ⓢ',t:'ⓣ',u:'ⓤ',v:'ⓥ',w:'ⓦ',x:'ⓧ',y:'ⓨ',z:'ⓩ', A:'Ⓐ',B:'Ⓑ',C:'Ⓒ',D:'Ⓓ',E:'Ⓔ',F:'Ⓕ',G:'Ⓖ',H:'Ⓗ',I:'Ⓘ',J:'Ⓙ',K:'Ⓚ',L:'Ⓛ',M:'Ⓜ',N:'Ⓝ',O:'Ⓞ',P:'Ⓟ',Q:'Ⓠ',R:'Ⓡ',S:'Ⓢ',T:'Ⓣ',U:'Ⓤ',V:'Ⓥ',W:'Ⓦ',X:'Ⓧ',Y:'Ⓨ',Z:'Ⓩ' },
+            "Mono": { a:'𝚊',b:'𝚋',c:'𝚌',d:'𝚍',e:'𝚎',f:'𝚏',g:'𝚐',h:'𝚑',i:'𝚒',j:'𝚓',k:'𝚔',l:'𝚕',m:'𝚖',n:'𝚗',o:'𝚘',p:'𝚙',q:'𝚚',r:'𝚛',s:'𝚜',t:'𝚝',u:'𝚞',v:'𝚟',w:'𝚠',x:'𝚡',y:'𝚢',z:'𝚣', A:'𝙰',B:'𝙱',C:'𝙲',D:'𝙳',E:'𝙴',F:'𝙵',G:'𝙶',H:'𝙷',I:'𝙸',J:'𝙹',K:'𝙺',L:'𝙻',M:'𝙼',N:'𝙽',O:'𝙾',P:'𝙿',Q:'𝚀',R:'𝚁',S:'𝚂',T:'𝚃',U:'𝚄',V:'𝚅',W:'𝚆',X:'𝚇',Y:'𝚈',Z:'𝚉' },
+            "Square": { a:'🄰',b:'🄱',c:'🄲',d:'🄳',e:'🄴',f:'🄵',g:'🄶',h:'🄷',i:'🄸',j:'🄹',k:'🄺',l:'🄻',m:'🄼',n:'🄽',o:'🄾',p:'🄿',q:'🅀',r:'🅁',s:'🅂',t:'🅃',u:'🅄',v:'🅅',w:'🅆',x:'🅇',y:'🅈',z:'🅉' },
+            "Wide": { a:'ａ',b:'ｂ',c:'ｃ',d:'ｄ',e:'ｅ',f:'ｆ',g:'ｇ',h:'ｈ',i:'ｉ',j:'ｊ',k:'ｋ',l:'ｌ',m:'ｍ',n:'ｎ',o:'ｏ',p:'ｐ',q:'ｑ',r:'ｒ',s:'ｓ',t:'ｔ',u:'ｕ',v:'ｖ',w:'ｗ',x:'ｘ',y:'ｙ',z:'ｚ' }
         };
 
-        const decoPresets = [
-            "꧁ [X] ꧂", "༺ [X] ༻", "⚔️ [X] ⚔️", "👑 [X] 👑", "🔥 [X] 🔥", "⚡ [X] ⚡",
-            "『 [X] 』", "⏤͟͟͞͞ [X]", "𓆩𓇢𓆸 [X]", "⩹ [X] ⩺", "✪ [X] ✪", "〆[X]〆"
+        const arDecor = [
+            " [N] 𖤍", "彡[N]彡", "『[N]』", "父[N]父", "々[N]々", "⫷[N]⫸", "★[N]★", "๛[N]๛", "『[N]』", "♔[N]♔", "♜[N]♜", "卍[N]卍", "☬[N]☬"
         ];
 
-        const randomDecor = ["๛", "々", "〆", "个", "乡", "〄", "⑇", "×", "ᝄ", "⚚", "❂", "☣️"];
-
-        function transform(text, type) {
-            return text.split('').map(char => fontEngine[type][char.toLowerCase()] || char).join('');
-        }
+        const universalDecos = ["꧁ [N] ꧂", "༺ [N] ༻", "⚔️ [N] ⚔️", "👑 [N] 👑", "🔥 [N] 🔥", "⚡ [N] ⚡", "⏤͟͟͞͞ [N]", "𓆩𓇢𓆸 [N]", "⩹ [N] ⩺", "⫷ [N] ⫸", "〆[N]〆", "๛[N]⌁", "𖤍 [N] 𖤍"];
 
         function render() {
-            const input = document.getElementById('mainInput').value.trim();
-            const grid = document.getElementById('resultsGrid');
-            grid.innerHTML = '';
-            if(!input) return;
+            const val = document.getElementById('mainInput').value.trim();
+            const engGrid = document.getElementById('engGrid');
+            const arGrid = document.getElementById('arGrid');
+            const decoGrid = document.getElementById('decoGrid');
+            
+            engGrid.innerHTML = ''; arGrid.innerHTML = ''; decoGrid.innerHTML = '';
 
-            // توليد الخطوط الخام
-            Object.keys(fontEngine).forEach(key => {
-                createCard(transform(input, key), key);
-            });
+            if(!val) return;
 
-            // توليد الزخارف
-            const boldBase = transform(input, 'bold');
-            decoPresets.forEach(p => {
-                createCard(p.replace('[X]', boldBase), 'STYLE');
+            // كشف اللغة
+            const isEn = /[a-zA-Z]/.test(val);
+            const isAr = /[\u0600-\u06FF]/.test(val);
+
+            // توليد الخطوط الإنجليزية
+            if(isEn) {
+                document.getElementById('engSection').classList.remove('hidden');
+                Object.keys(enMaps).forEach(style => {
+                    const res = val.split('').map(c => enMaps[style][c] || c).join('');
+                    createCard(engGrid, res, style);
+                });
+            } else { document.getElementById('engSection').classList.add('hidden'); }
+
+            // توليد الزخارف العربية
+            if(isAr) {
+                document.getElementById('arSection').classList.remove('hidden');
+                arDecor.forEach(d => {
+                    createCard(arGrid, d.replace('[N]', val), "ARABIC");
+                });
+            } else { document.getElementById('arSection').classList.add('hidden'); }
+
+            // الزخارف العالمية (Luxury)
+            const baseText = isEn ? val.split('').map(c => enMaps.Bold[c] || c).join('') : val;
+            universalDecos.forEach(u => {
+                createCard(decoGrid, u.replace('[N]', baseText), "LUXURY");
             });
         }
 
-        function createCard(text, label) {
+        function createCard(grid, text, label) {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `<div class="style-label">${label}</div><div class="result-text">${text}</div>`;
-            card.onclick = () => copy(text);
-            document.getElementById('resultsGrid').appendChild(card);
+            card.innerHTML = `<span class="label">${label}</span><div class="text">${text}</div>`;
+            card.onclick = () => {
+                navigator.clipboard.writeText(text);
+                const t = document.getElementById('toast');
+                t.style.opacity = '1';
+                setTimeout(() => t.style.opacity = '0', 1500);
+                if(window.navigator.vibrate) window.navigator.vibrate(40);
+            };
+            grid.appendChild(card);
         }
 
-        function copy(text) {
-            navigator.clipboard.writeText(text);
-            const t = document.getElementById('toast');
-            t.style.opacity = '1';
-            setTimeout(() => t.style.opacity = '0', 1500);
-            if(window.navigator.vibrate) window.navigator.vibrate(50);
-        }
-
-        function randomize() {
+        function randomDecor() {
             const input = document.getElementById('mainInput');
             if(!input.value) return;
-            const r = randomDecor[Math.floor(Math.random() * randomDecor.length)];
-            input.value = r + " " + input.value + " " + r;
+            const syms = ["𖤍", "々", "〆", "๛", "★", "⚡", "🔥"];
+            const s = syms[Math.floor(Math.random()*syms.length)];
+            input.value = s + " " + input.value + " " + s;
             render();
         }
 
-        // إغلاق شاشة الترحيب
-        window.addEventListener('load', () => {
+        window.onload = () => {
             setTimeout(() => {
                 document.getElementById('splash-screen').style.transform = 'translateY(-100%)';
             }, 2500);
-        });
+        };
 
         document.getElementById('mainInput').addEventListener('input', render);
     </script>
