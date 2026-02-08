@@ -2,43 +2,36 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#1a0a2e"> <title>Eren Zakhrafa | مزخرف احترافي</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Eren Zakhrafa</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="stars-container"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="logo-text">Eren <span>ZAKHRAFA</span></h1>
+            <p>زخارف احترافية ورموز مميزة لجميع المنصات</p>
+        </header>
 
-<div class="background-particles">
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-</div>
-
-<div class="container">
-    <header>
-        <h1>Eren <span>ZAKHRAFA</span></h1>
-        <p>مُولد خطوط فريد ومؤثرات بصرية ساحرة</p>
-    </header>
-
-    <div class="input-section glow-border">
-        <input type="text" id="userInput" placeholder="اكتب اسمك هنا (مثال: EREN YEAGER)..." spellcheck="false">
-    </div>
-
-    <div class="dev-section glow-border">
-        <h3>✨ صانع الزخارف المخصصة</h3>
-        <div class="add-group">
-            <input type="text" id="customTemplate" placeholder="مثال: 『🔥 [نص] 🔥』">
-            <button onclick="addNewTemplate()">إضافة</button>
+        <div class="main-card">
+            <label>INPUT</label>
+            <input type="text" id="userInput" placeholder="اكتب اسمك هنا (مثال: AMIR)..." spellcheck="false">
         </div>
+
+        <div class="dev-box">
+            <div class="dev-header">🛠️ مصنع الزخارف المخصصة</div>
+            <div class="add-group">
+                <input type="text" id="customTemplate" placeholder="مثال: 🔥 [نص] 🔥">
+                <button onclick="addNewTemplate()">إضافة</button>
+            </div>
+        </div>
+
+        <div id="resultsBox" class="results-grid"></div>
     </div>
 
-    <div id="resultsBox" class="results-container"></div>
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
