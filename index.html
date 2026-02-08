@@ -3,105 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>EREN SYSTEM - CLEAR EDITION</title>
+    <title>EREN OS - INTELLIGENT DECO</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
     <style>
         :root { --neon: #00f2ff; --purple: #bc13fe; --bg: #030308; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; padding-bottom: 50px; line-height: 1.6; }
+        body { background: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; padding-bottom: 50px; }
         
-        /* شاشة التحميل */
         #splash { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 2000; transition: 0.5s; }
-        .logo { width: 90px; height: 90px; border-radius: 50%; border: 2px solid var(--neon); box-shadow: 0 0 15px var(--neon); }
+        .logo { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--neon); box-shadow: 0 0 15px var(--neon); }
 
-        .container { max-width: 500px; margin: auto; padding: 20px; }
-        .header h1 { font-size: 2rem; color: var(--neon); text-align: center; margin-bottom: 5px; }
-        .header p { text-align: center; color: #666; font-size: 0.8rem; margin-bottom: 25px; }
+        .container { max-width: 600px; margin: auto; padding: 20px; }
+        .header { text-align: center; margin-bottom: 25px; }
+        .header h1 { font-size: 2.5rem; color: var(--neon); margin: 0; text-shadow: 0 0 10px var(--neon); }
 
-        input { width: 100%; padding: 18px; border-radius: 15px; border: 2px solid #222; background: #111; color: #fff; font-size: 1.2rem; text-align: center; margin-bottom: 30px; transition: 0.3s; }
-        input:focus { border-color: var(--neon); outline: none; box-shadow: 0 0 10px rgba(0,242,255,0.2); }
+        input { width: 100%; padding: 18px; border-radius: 20px; border: 2px solid #222; background: #111; color: #fff; font-size: 1.3rem; text-align: center; margin-bottom: 20px; transition: 0.3s; }
+        input:focus { border-color: var(--neon); outline: none; box-shadow: 0 0 15px rgba(0,242,255,0.2); }
 
-        .section-title { color: var(--purple); font-size: 0.9rem; font-weight: 900; margin: 20px 0 10px; border-right: 3px solid var(--purple); padding-right: 10px; }
+        .section-title { color: var(--purple); font-size: 1rem; font-weight: 900; margin: 30px 0 15px; border-right: 4px solid var(--purple); padding-right: 12px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-        .card { background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 12px; padding: 15px; text-align: center; cursor: pointer; transition: 0.2s; }
-        .card:active { background: var(--neon); color: #000; }
-        .card .style-info { font-size: 0.6rem; opacity: 0.5; display: block; margin-bottom: 5px; }
-        .card .text-val { font-size: 1.1rem; font-weight: bold; word-break: break-all; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 15px; }
+        .card { background: rgba(255,255,255,0.04); border: 1px solid #222; border-radius: 15px; padding: 18px; text-align: center; cursor: pointer; transition: 0.2s; position: relative; }
+        .card:active { transform: scale(0.95); background: var(--neon); color: #000; }
+        .card .badge { position: absolute; top: 5px; right: 8px; font-size: 0.5rem; color: var(--neon); opacity: 0.7; }
+        .card .text-val { font-size: 1.2rem; font-weight: bold; word-break: break-all; }
 
-        #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--neon); color: #000; padding: 10px 25px; border-radius: 50px; font-weight: 900; opacity: 0; transition: 0.3s; z-index: 3000; }
+        #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--neon); color: #000; padding: 12px 30px; border-radius: 50px; font-weight: 900; opacity: 0; transition: 0.3s; z-index: 3000; }
+        @media (max-width: 450px) { .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <div id="splash">
-    <img src="logo.png" class="logo" onerror="this.src='https://via.placeholder.com/90/00f2ff/000?text=E'">
-    <p style="color:var(--neon); margin-top:10px;">EREN OS v4.0</p>
+    <img src="logo.png" class="logo" onerror="this.src='https://via.placeholder.com/80/00f2ff/000?text=E'">
+    <p style="color:var(--neon); margin-top:10px; letter-spacing:3px;">EREN ENGINE V5</p>
 </div>
 
 <div class="container">
     <div class="header">
-        <h1>EREN OS</h1>
-        <p>نظام الزخرفة المتوافق مع جميع الأجهزة</p>
+        <h1>EREN DECO</h1>
     </div>
 
-    <input type="text" id="userInput" placeholder="اكتب الاسم هنا..." maxlength="25">
+    <input type="text" id="userInput" placeholder="اكتب الاسم (Yasser / ياسر)" maxlength="30">
 
-    <div id="fontsGroup">
-        <div class="section-title">أنماط الخطوط (English Fonts)</div>
-        <div id="fontsGrid" class="grid"></div>
-    </div>
-
-    <div id="decoGroup">
-        <div class="section-title">زخارف عربية وعالمية (100+)</div>
-        <div id="decoGrid" class="grid"></div>
+    <div id="resultArea">
+        <div class="section-title">الزخارف الذكية (Smart Decoration)</div>
+        <div id="mainGrid" class="grid"></div>
     </div>
 </div>
 
-<div id="toast">تم النسخ ✅</div>
+<div id="toast">تم النسخ بنجاح ✅</div>
 
 <script>
-    // خرائط الحروف الأكثر أماناً وقراءة في كل الهواتف
-    const safeMaps = {
-        "Bold": { a:'𝐚',b:'𝐛',c:'𝐜',d:'𝐝',e:'𝐞',f:'𝐟',g:'𝐠',h:'𝐡',i:'𝐢',j:'𝐣',k:'𝐤',l:'𝐥',m:'𝐦',n:'𝐧',o:'𝐨',p:'𝐩',q:'𝐪',r:'𝐫',s:'𝐬',t:'𝐭',u:'𝐮',v:'𝐯',w:'𝐰',x:'𝐱',y:'𝐲',z:'𝐳' },
-        "Typewriter": { a:'𝚊',b:'𝚋',c:'𝚌',d:'𝚍',e:'𝚎',f:'𝚏',g:'𝚐',h:'𝚑',i:'𝚒',j:'𝚓',k:'𝚔',l:'𝚕',m:'𝐦',n:'𝚗',o:'𝚘',p:'𝚙',q:'𝚚',r:'𝚛',s:'𝚜',t:'𝚝',u:'𝚞',v:'𝚟',w:'𝚠',x:'𝚡',y:'𝚢',z:'𝚣' },
-        "Italic": { a:'𝘢',b:'𝘣',c:'𝘤',d:'𝘥',e:'𝘦',f:'𝘧',g:'𝘨',h:'𝘩',i:'𝘪',j:'𝘫',k:'𝑘',l:'𝑙',m:'𝑚',n:'𝑛',o:'𝑜',p:'𝑝',q:'𝑞',r:'𝑟',s:'𝑠',t:'𝑡',u:'𝑢',v:'𝑣',w:'𝑤',x:'𝑥',y:'𝑦',z:'𝑧' }
+    // خرائط الخطوط المقروءة 100%
+    const fonts = {
+        "Bold": { a:'𝐚',b:'𝐛',c:'𝐜',d:'𝐝',e:'𝐞',f:'𝐟',g:'𝐠',h:'𝐡',i:'𝐢',j:'𝐣',k:'𝐤',l:'𝐥',m:'𝐦',n:'𝐧',o:'𝐨',p:'𝐩',q:'𝐪',r:'𝐫',s:'𝐬',t:'𝐭',u:'𝐮',v:'𝐯',w:'𝐰',x:'𝐱',y:'𝐲',z:'𝐳',A:'𝐀',B:'𝐁',C:'𝐂',D:'𝐃',E:'𝐄',F:'𝐅',G:'𝐆',H:'𝐇',I:'𝐈',J:'𝐉',K:'𝐊',L:'𝐋',M:'𝐌',N:'𝐍',O:'𝐎',P:'𝐏',Q:'𝐐',R:'𝐑',S:'𝐒',T:'𝐓',U:'𝐔',V:'𝐕',W:'𝐖',X:'𝐗',Y:'𝐘',Z:'𝐙' },
+        "Italic": { a:'𝘢',b:'𝘣',c:'𝑐',d:'𝑑',e:'𝑒',f:'𝑓',g:'𝑔',h:'𝘩',i:'𝑖',j:'𝑗',k:'𝑘',l:'𝑙',m:'𝑚',n:'𝑛',o:'𝑜',p:'𝑝',q:'𝑞',r:'𝑟',s:'𝑠',t:'𝑡',u:'𝑢',v:'𝑣',w:'𝑤',x:'𝑥',y:'𝑦',z:'𝑧',A:'𝘈',B:'𝘉',C:'𝘊',D:'𝘋',E:'𝘌',F:'𝘍',G:'𝘎',H:'𝘏',I:'𝘐',J:'𝘑',K:'𝘒',L:'𝘓',M:'𝘔',N:'𝘕',O:'𝘖',P:'𝘗',Q:'𝘘',R:'𝘙',S:'𝘚',T:'𝘛',U:'𝘜',V:'𝘝',W:'𝘞',X:'𝘟',Y:'𝘠',Z:'𝘡' },
+        "Mono": { a:'𝚊',b:'𝚋',c:'𝚌',d:'𝚍',e:'𝚎',f:'𝚏',g:'𝚐',h:'𝚑',i:'𝚒',j:'𝚓',k:'𝚔',l:'𝚕',m:'𝚖',n:'𝚗',o:'𝚘',p:'𝚙',q:'𝚚',r:'𝚛',s:'𝚜',t:'𝚝',u:'𝚞',v:'𝚟',w:'𝚠',x:'𝚡',y:'𝚢',z:'𝚣',A:'𝙰',B:'𝙱',C:'𝙲',D:'𝙳',E:'𝙴',F:'𝙵',G:'𝙶',H:'𝙷',I:'𝙸',J:'𝙹',K:'𝙺',L:'𝙻',M:'𝙼',N:'𝙽',O:'𝙾',P:'𝙿',Q:'𝚀',R:'𝚁',S:'𝚂',T:'𝚃',U:'𝚄',V:'𝚅',W:'𝚆',X:'𝚇',Y:'𝚈',Z:'𝚉' }
     };
 
     const decorators = [
-        "꧁[N]꧂", "༺[N]༻", "『[N]』", "「[N]」", "【[N]】", "«[N]»", "๏[N]๏", "◈[N]◈", "❖[N]❖", "۩[N]۩", 
-        "⚔[N]⚔", "❂[N]❂", "⩹[N]⩺", "⫷[N]⫸", "◤[N]◥", "〆[N]〆", "々[N]々", "๛[N]๛", "彡[N]彡", "ツ[N]ツ", 
-        "♔[N]♔", "☬[N]☬", "卍[N]卍", "𖤍[N]𖤍", "⏤[N]⏤", "𓆩[N]𓆪", "⊚[N]⊚", "⊕[N]⊕", "☾[N]☽", "⚒[N]⚒",
-        "⚓[N]⚓", "☯[N]☯", "⚡[N]⚡", "❄[N]❄", "✹[N]✹", "✵[N]✵", "⸎[N]⸎", "⸙[N]⸙", "ᝄ[N]ᝄ", "⚚[N]⚚"
+        "『[N]』", "༺[N]༻", "꧁[N]꧂", "「[N]」", "【[N]】", "〆[N]〆", "々[N]々", "๛[N]๛", "彡[N]彡", "ツ[N]ツ", 
+        "⚔[N]⚔", "𖤍[N]𖤍", "𓆩[N]𓆪", "『[N]』", "«[N]»", "◈[N]◈", "❖[N]❖", "❂[N]❂", "⩹[N]⩺", "⫷[N]⫸"
     ];
 
-    const arabicSafe = {'ر':'ࢪ','و':'ۥ','ي':'ے','ه':'ہ','ك':'ڪ','ن':'نۨ','ق':'قُ','ح':'حۡ'};
+    const arMap = {'ر':'ࢪ','و':'ۥ','ي':'ے','ه':'ہ','ك':'ڪ','ن':'نۨ','ق':'قُ','ح':'حۡ'};
+
+    function applyFont(text, fontKey) {
+        return text.split('').map(c => fonts[fontKey][c] || c).join('');
+    }
 
     function render() {
         const input = document.getElementById('userInput').value.trim();
-        const fGrid = document.getElementById('fontsGrid');
-        const dGrid = document.getElementById('decoGrid');
-        
-        fGrid.innerHTML = ''; dGrid.innerHTML = '';
+        const grid = document.getElementById('mainGrid');
+        grid.innerHTML = '';
         if(!input) return;
 
-        // 1. معالجة الخطوط الإنجليزية
-        Object.keys(safeMaps).forEach(key => {
-            let res = input.split('').map(c => safeMaps[key][c.toLowerCase()] || c).join('');
-            createCard(fGrid, res, key);
+        // 1. توليد خيارات الخطوط الصافية أولاً
+        Object.keys(fonts).forEach(fKey => {
+            createCard(grid, applyFont(input, fKey), fKey);
         });
 
-        // 2. معالجة الزخارف
-        const baseArabic = input.split('').map(c => arabicSafe[c] || c).join('');
+        // 2. توليد الزخارف الذكية (دمج الخط داخل الزخرفة)
+        const isEn = /[a-zA-Z]/.test(input);
+        const isAr = /[\u0600-\u06FF]/.test(input);
+
         decorators.forEach(dec => {
-            createCard(dGrid, dec.replace('[N]', baseArabic), "Style");
+            let processedName = input;
+            
+            if(isEn) {
+                // نستخدم الـ Bold داخل الزخرفة الإنجليزية تلقائياً لتبدو كفخامة 『𝐘𝐚𝐬𝐬𝐞𝐫』
+                processedName = applyFont(input, "Bold");
+            } else if(isAr) {
+                // نستخدم الحروف الممتدة داخل الزخرفة العربية
+                processedName = input.split('').map(c => arMap[c] || c).join('');
+            }
+
+            createCard(grid, dec.replace('[N]', processedName), "Smart Deco");
         });
     }
 
     function createCard(grid, text, label) {
         const div = document.createElement('div');
         div.className = 'card';
-        div.innerHTML = `<span class="style-info">${label}</span><div class="text-val">${text}</div>`;
+        div.innerHTML = `<span class="badge">${label}</span><div class="text-val">${text}</div>`;
         div.onclick = () => {
             navigator.clipboard.writeText(text);
             const t = document.getElementById('toast');
@@ -111,7 +116,7 @@
         grid.appendChild(div);
     }
 
-    window.onload = () => setTimeout(() => document.getElementById('splash').style.display = 'none', 1500);
+    window.onload = () => setTimeout(() => document.getElementById('splash').style.display = 'none', 1200);
     document.getElementById('userInput').addEventListener('input', render);
 </script>
 </body>
