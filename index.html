@@ -3,35 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zakhrafa Dev Pro</title>
+    <title>المزخرف المحترف PRO</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#38bdf8">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="container">
         <header>
-            <h1>ZAKHRAFA <span>DEV</span></h1>
-            <p>صمم زخرفتك الخاصة وزخرف اسمك باحترافية</p>
+            <h1>ZAKHRAFA <span>100+</span></h1>
+            <p>زخرف اسمك بأكثر من 100 شكل احترافي</p>
         </header>
 
-        <div class="main-card">
-            <input type="text" id="userInput" placeholder="اكتب اسمك هنا (English)...">
-            <div id="counter">0 حرف</div>
+        <div class="main-input-card">
+            <input type="text" id="userInput" placeholder="اكتب اسمك بالإنجليزية هنا...">
         </div>
 
-        <div class="developer-section">
-            <h3>🛠️ مصنع الزخارف</h3>
-            <p>صمم قالبك الخاص باستخدام الرمز <b>[نص]</b></p>
-            <div class="design-group">
+        <div class="dev-box">
+            <h3>🛠️ مصنع الزخارف الخاصة</h3>
+            <div class="input-group">
                 <input type="text" id="customTemplate" placeholder="مثال: ꧁ [نص] ꧂">
-                <button onclick="addNewTemplate()" class="btn-add">إضافة</button>
+                <button onclick="addNewTemplate()">إضافة</button>
             </div>
         </div>
 
-        <div id="resultsBox" class="results-grid"></div>
+        <div id="resultsBox" class="results-list"></div>
     </div>
 
     <script src="script.js"></script>
