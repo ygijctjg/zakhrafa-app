@@ -2,35 +2,44 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#58a6ff">
     <title>المزخرف المحترف PRO</title>
+    
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>ZAKHRAFA <span>100+</span></h1>
-            <p>زخرف اسمك بأكثر من 100 شكل احترافي</p>
-        </header>
+<div class="container">
+    <header>
+        <h1>ZAKHRAFA <span>PRO</span></h1>
+        <p>تطبيق الزخرفة المستقل - 100+ خط</p>
+    </header>
 
-        <div class="main-input-card">
-            <input type="text" id="userInput" placeholder="اكتب اسمك بالإنجليزية هنا...">
-        </div>
-
-        <div class="dev-box">
-            <h3>🛠️ مصنع الزخارف الخاصة</h3>
-            <div class="input-group">
-                <input type="text" id="customTemplate" placeholder="مثال: ꧁ [نص] ꧂">
-                <button onclick="addNewTemplate()">إضافة</button>
-            </div>
-        </div>
-
-        <div id="resultsBox" class="results-list"></div>
+    <div class="input-section">
+        <input type="text" id="userInput" placeholder="اكتب اسمك هنا (مثال: AMIR)...">
     </div>
 
-    <script src="script.js"></script>
+    <div class="dev-section">
+        <div class="add-group">
+            <input type="text" id="customTemplate" placeholder="صمم قالبك الخاص: ꧁ [نص] ꧂">
+            <button onclick="addNewTemplate()">إضافة</button>
+        </div>
+    </div>
+
+    <div id="resultsBox" class="results-container"></div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    // تفعيل الخدمة ليعمل كـ تطبيق مستقل
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+    }
+</script>
 </body>
 </html>
