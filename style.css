@@ -1,89 +1,64 @@
 :root {
-    --primary: #38bdf8;
-    --bg: #0f172a;
-    --card-bg: #1e293b;
-    --text: #f8fafc;
+    --primary: #00f2fe;
+    --accent: #4facfe;
+    --bg: #0a0a0b;
+    --card: #161b22;
 }
 
 body {
     font-family: 'Tajawal', sans-serif;
     background-color: var(--bg);
-    color: var(--text);
-    margin: 0; padding: 20px;
+    color: white;
+    margin: 0; padding: 15px;
     direction: rtl;
 }
 
-.container { max-width: 600px; margin: auto; }
+.container { max-width: 500px; margin: auto; }
 
-header h1 span { color: var(--primary); }
+h1 span { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
-.main-card {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-}
-
-#userInput {
+.main-input-card input, .input-group input {
     width: 100%;
     padding: 15px;
-    border-radius: 10px;
-    border: 2px solid #334155;
-    background: #0f172a;
+    border-radius: 12px;
+    border: 2px solid #30363d;
+    background: #0d1117;
     color: white;
     font-size: 1.1rem;
     box-sizing: border-box;
 }
 
-.developer-section {
-    background: rgba(56, 189, 248, 0.1);
-    border: 2px dashed var(--primary);
+.dev-box {
+    background: var(--card);
     padding: 15px;
     border-radius: 15px;
-    margin-bottom: 25px;
+    margin: 20px 0;
+    border: 1px dashed var(--primary);
 }
 
-.design-group { display: flex; gap: 10px; margin-top: 10px; }
+.input-group { display: flex; gap: 10px; margin-top: 10px; }
 
-.design-group input {
-    flex: 2;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #334155;
-    background: var(--bg);
-    color: white;
-}
-
-.btn-add {
-    flex: 1;
-    background: var(--primary);
-    color: var(--bg);
+button {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
     border: none;
     border-radius: 8px;
+    color: #000;
     font-weight: bold;
     cursor: pointer;
 }
 
 .card {
-    background: var(--card-bg);
+    background: var(--card);
     padding: 15px;
     border-radius: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #334155;
-    animation: fadeIn 0.3s ease;
+    border: 1px solid #30363d;
 }
 
-.copy-btn {
-    background: var(--primary);
-    color: var(--bg);
-    border: none;
-    padding: 8px 15px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-}
+.copy-btn { background: #238636; color: white; }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.del-btn { background: #da3633; color: white; margin-left: 5px; }
