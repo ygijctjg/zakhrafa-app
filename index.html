@@ -3,159 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>EREN OS - GENESIS V3</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    <title>EREN OS - PRO DECO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --neon: #00f2ff; --purple: #bc13fe; --bg: #030308; --glass: rgba(255, 255, 255, 0.05); }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; min-height: 100vh; overflow-x: hidden; background-image: radial-gradient(circle at 50% 10%, rgba(0, 242, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 90% 90%, rgba(188, 19, 254, 0.1) 0%, transparent 50%); }
-        #splash-screen { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100000; transition: 0.8s cubic-bezier(1,0,0,1); }
-        .logo-box img { width: 140px; height: 140px; border-radius: 50%; border: 2px solid var(--neon); box-shadow: 0 0 40px var(--neon); }
-        .container { max-width: 600px; margin: auto; padding: 40px 20px 120px; }
-        .header { text-align: center; margin-bottom: 40px; }
-        .header h1 { font-family: 'Orbitron'; font-size: 2.8rem; margin: 0; letter-spacing: 8px; background: linear-gradient(90deg, var(--neon), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .input-box { width: 100%; background: var(--glass); border: 1px solid rgba(0, 242, 255, 0.3); padding: 22px; border-radius: 25px; color: white; font-size: 1.4rem; text-align: center; backdrop-filter: blur(15px); transition: 0.3s; margin-bottom: 30px; }
-        .input-box:focus { border-color: var(--neon); box-shadow: 0 0 25px rgba(0, 242, 255, 0.4); outline: none; }
-        .section-title { font-size: 0.8rem; letter-spacing: 2px; color: var(--neon); margin: 25px 0 15px; font-weight: 900; text-transform: uppercase; border-right: 4px solid var(--purple); padding-right: 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 15px; }
-        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 22px; padding: 20px; text-align: center; cursor: pointer; transition: 0.2s; position: relative; overflow: hidden; }
-        .card:active { transform: scale(0.92); border-color: var(--neon); }
-        .card .label { font-size: 0.5rem; opacity: 0.5; margin-bottom: 10px; display: block; }
-        .card .text { font-size: 1.2rem; font-weight: bold; word-break: break-all; }
-        #toast { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%); background: var(--neon); color: black; padding: 12px 30px; border-radius: 50px; font-weight: 900; opacity: 0; transition: 0.4s; z-index: 1000; pointer-events: none; }
-        .nav { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; display: flex; justify-content: space-around; padding: 15px; }
-        .nav-btn { font-size: 1.6rem; cursor: pointer; transition: 0.3s; }
-        .hidden { display: none; }
-        @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
+        body { background: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; min-height: 100vh; overflow-x: hidden; background-image: radial-gradient(circle at 50% 10%, rgba(0, 242, 255, 0.1) 0%, transparent 50%); }
+        
+        #splash-screen { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100000; transition: 0.8s; }
+        .logo-box img { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--neon); box-shadow: 0 0 30px var(--neon); }
+        
+        .container { max-width: 600px; margin: auto; padding: 30px 15px 120px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-family: 'Orbitron'; font-size: 2.2rem; margin: 0; background: linear-gradient(90deg, var(--neon), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .input-box { width: 100%; background: var(--glass); border: 1px solid rgba(0, 242, 255, 0.3); padding: 20px; border-radius: 20px; color: white; font-size: 1.3rem; text-align: center; backdrop-filter: blur(10px); margin-bottom: 25px; }
+        
+        .section-title { font-size: 0.8rem; color: var(--neon); margin: 20px 0 10px; border-right: 4px solid var(--purple); padding-right: 10px; font-weight: 900; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 18px; text-align: center; cursor: pointer; transition: 0.2s; }
+        .card:active { transform: scale(0.95); border-color: var(--neon); }
+        .card .text { font-size: 1.1rem; font-weight: bold; word-break: break-all; }
+
+        #toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--neon); color: black; padding: 10px 25px; border-radius: 50px; font-weight: 900; opacity: 0; transition: 0.4s; z-index: 1000; }
+        .nav { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); width: 85%; max-width: 400px; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-radius: 40px; display: flex; justify-content: space-around; padding: 12px; border: 1px solid #333; }
+        .nav-btn { font-size: 1.4rem; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div id="splash-screen">
-        <div class="logo-box"><img src="logo.png" onerror="this.src='https://via.placeholder.com/150/00f2ff/000?text=EREN'"></div>
-        <h2 style="font-family:'Orbitron'; color:var(--neon); margin-top:20px; letter-spacing:5px;">EREN OS LOADED</h2>
+        <div class="logo-box"><img src="logo.png" onerror="this.src='https://via.placeholder.com/120/00f2ff/000?text=EREN'"></div>
+        <p style="color:var(--neon); margin-top:15px; letter-spacing:3px; font-size: 0.7rem;">SYSTEM INITIALIZING...</p>
     </div>
 
     <div class="container">
-        <div class="header">
-            <h1>GENESIS</h1>
-            <p style="color:#444; font-weight:900; font-size:0.7rem;">ULTIMATE ARABIC ENGINE</p>
-        </div>
-
-        <input type="text" id="mainInput" class="input-box" placeholder="اكتب اسمك هنا بالعربي أو En...">
-
-        <div id="arSection" class="hidden">
-            <div class="section-title">زخرفة الحروف الممتدة والتشكيل</div>
-            <div id="arGrid" class="grid"></div>
-        </div>
-
-        <div id="engSection" class="hidden">
-            <div class="section-title">English Styles</div>
-            <div id="engGrid" class="grid"></div>
-        </div>
-
-        <div class="section-title">Luxury Decorations</div>
+        <div class="header"><h1>EREN PRO</h1></div>
+        <input type="text" id="mainInput" class="input-box" placeholder="اكتب اسمك للزخرفة الفورية...">
+        <div class="section-title">100+ NON-EMOJI STYLES</div>
         <div id="decoGrid" class="grid"></div>
     </div>
 
-    <div id="toast">تم النسخ بنجاح ✅</div>
+    <div id="toast">تم النسخ ✅</div>
 
     <nav class="nav">
         <div class="nav-btn" onclick="location.reload()">🔄</div>
-        <div class="nav-btn" onclick="randomDecor()">✨</div>
         <div class="nav-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">🔝</div>
     </nav>
 
     <script>
-        const enMaps = {
-            "Bold": { a:'𝐚',b:'𝐛',c:'𝐜',d:'𝐝',e:'𝐞',f:'𝐟',g:'𝐠',h:'𝐡',i:'𝐢',j:'𝐣',k:'𝐤',l:'𝐥',m:'𝐦',n:'𝐧',o:'𝐨',p:'𝐩',q:'𝐪',r:'𝐫',s:'𝐬',t:'𝐭',u:'𝐮',v:'𝐯',w:'𝐰',x:'𝐱',y:'𝐲',z:'𝐳', A:'𝐀',B:'𝐁',C:'𝐂',D:'𝐃',E:'𝐄',F:'الف',G:'𝐆',H:'𝐇',I:'𝐈',J:'𝐉',K:'𝐊',L:'𝐋',M:'𝐌',N:'𝐍',O:'𝐎',P:'𝐏',Q:'𝐐',R:'𝐑',S:'𝐒',T:'𝐓',U:'𝐔',V:'𝐕',W:'𝐖',X:'𝐗',Y:'𝐘',Z:'𝐙' },
-            "Bubble": { a:'ⓐ',b:'ⓑ',c:'ⓒ',d:'ⓓ',e:'ⓔ',f:'ⓕ',g:'ⓖ',h:'ⓗ',i:'ⓘ',j:'ⓙ',k:'ⓚ',l:'ⓛ',m:'ⓜ',n:'ⓝ',o:'ⓞ',p:'ⓟ',q:'ⓠ',r:'ⓡ',s:'ⓢ',t:'ⓣ',u:'ⓤ',v:'ⓥ',w:'ⓦ',x:'ⓧ',y:'ⓨ',z:'ⓩ' }
-        };
-
-        // محرك استبدال الحروف العربية (الراء الممتدة وغيرها)
-        const arExtendedMap = {
-            'ر': 'ࢪ',
-            'و': 'ۥ',
-            'ي': 'ے',
-            'ه': 'ہ',
-            'ك': 'ڪ',
-            'ن': 'نۨ',
-            'ق': 'قُ',
-            'ح': 'حۡ',
-        };
-
-        const arDecorTemplates = [
-            " [N] 𖤍", "彡[N]彡", "『[N]』", "父[N]父", "々[N]々", "★[N]★", "๛[N]๛", "♔[N]♔", "☬[N]☬"
+        // مصفوفة الـ 100 زخرفة (بدون إيموجيات)
+        const templates = [
+            "꧁[N]꧂", "༺[N]༻", "『[N]』", "「[N]」", "【[N]】", "〖[N]〗", "〔[N]〕", "〘[N]〙", "〚[N]〛", "«[N]»",
+            "‹[N]›", "๏[N]๏", "๑[N]๑", "×[N]×", "÷[N]÷", "±[N]±", "◈[N]◈", "◇[N]◇", "◆[N]◆", "❖[N]❖",
+            "۞[N]۞", "۩[N]۩", "§[N]§", "¶[N]¶", "†[N]†", "‡[N]‡", "⚓[N]⚓", "⚔[N]⚔", "⚖[N]⚖", "⚙[N]⚙",
+            "⚚[N]⚚", "❂[N]❂", "❃[N]❃", "❄[N]❄", "✹[N]✹", "✸[N]✸", "✷[N]✷", "✶[N]✶", "✵[N]✵", "✴[N]✴",
+            "✳[N]✳", "✲[N]✲", "✱[N]✱", "✰[N]✰", "✯[N]✯", "🌟[N]🌟", "✬[N]✬", "✭[N]✭", "✮[N]✮", "✨[N]✨",
+            "⩹[N]⩺", "⩺[N]⩹", "⫷[N]⫸", "⫸[N]⫷", "⫹[N]⫺", "⫺[N]⫹", "◤[N]◥", "◢[N]◣", "◥[N]◤", "◣[N]◢",
+            "〆[N]〆", "々[N]々", "๛[N]๛", "彡[N]彡", "ツ[N]ツ", "〄[N]〄", "〩[N]〩", "ゞ[N]ゞ", "〰[N]〰", " reflection[N]reflection",
+            "⸎[N]⸎", "⸏[N]⸏", "⸐[N]⸐", "⸑[N]⸑", "⸒[N]⸒", "⸓[N]⸓", "⸔[N]⸔", "⸕[N]⸕", "⸖[N]⸖", "⸗[N]⸗",
+            "⸘[N]⸘", "⸙[N]⸙", "⸚[N]⸚", "⸛[N]⸛", "⸜[N]⸜", "⸝[N]⸝", "⸞[N]⸞", "⸟[N]⸟", "⸠[N]⸠", "⸡[N]⸡",
+            "꙰[N]꙰", "꙳[N]꙳", "ꙴ[N]ꙴ", "ꙵ[N]ꙵ", "ꙶ[N]ꙶ", "ꙷ[N]ꙷ", "ꙸ[N]ꙸ", "ꙹ[N]ꙹ", "ꙺ[N]ꙺ", "ꙻ[N]ꙻ"
         ];
 
-        const universalDecos = ["꧁ [N] ꧂", "༺ [N] ༻", "⚔️ [N] ⚔️", "👑 [N] 👑", "🔥 [N] 🔥", "⏤͟͟͞͞ [N]", "𓆩𓇢𓆸 [N]", "〆[N]〆"];
-
-        function decorateArabic(text) {
-            let extended = text.split('').map(char => arExtendedMap[char] || char).join('');
-            let stylized = text.split('').map(char => char + 'ُ').join(''); // تشكيل تلقائي
-            return [extended, stylized];
-        }
+        // محرك الحروف العربية الممتدة
+        const arExtended = {'ر':'ࢪ','و':'ۥ','ي':'ے','ه':'ہ','ك':'ڪ','ن':'نۨ','ق':'قُ','ح':'حۡ'};
 
         function render() {
             const val = document.getElementById('mainInput').value.trim();
-            const engGrid = document.getElementById('engGrid');
-            const arGrid = document.getElementById('arGrid');
-            const decoGrid = document.getElementById('decoGrid');
-            
-            engGrid.innerHTML = ''; arGrid.innerHTML = ''; decoGrid.innerHTML = '';
-
+            const grid = document.getElementById('decoGrid');
+            grid.innerHTML = '';
             if(!val) return;
 
-            const isEn = /[a-zA-Z]/.test(val);
-            const isAr = /[\u0600-\u06FF]/.test(val);
+            // معالجة النص العربي (ࢪ)
+            const extendedText = val.split('').map(c => arExtended[c] || c).join('');
 
-            // القسم الإنجليزي
-            if(isEn) {
-                document.getElementById('engSection').classList.remove('hidden');
-                Object.keys(enMaps).forEach(style => {
-                    const res = val.split('').map(c => enMaps[style][c] || c).join('');
-                    createCard(engGrid, res, style);
-                });
-            }
-
-            // القسم العربي المطور (الراء الممتدة وغيرها)
-            if(isAr) {
-                document.getElementById('arSection').classList.remove('hidden');
-                const [ext, styl] = decorateArabic(val);
-                createCard(arGrid, ext, "ممتد (ࢪ)");
-                createCard(arGrid, styl, "تشكيل");
-                arDecorTemplates.forEach(d => {
-                    createCard(arGrid, d.replace('[N]', ext), "AR-STYLE");
-                });
-            }
-
-            // الزخارف العالمية
-            const baseText = isEn ? val.split('').map(c => enMaps.Bold[c] || c).join('') : val;
-            universalDecos.forEach(u => {
-                createCard(decoGrid, u.replace('[N]', baseText), "LUXURY");
+            // إنشاء الـ 100 زخرفة
+            templates.forEach(t => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                const finalStr = t.replace('[N]', extendedText);
+                card.innerHTML = `<div class="text">${finalStr}</div>`;
+                card.onclick = () => {
+                    navigator.clipboard.writeText(finalStr);
+                    const toast = document.getElementById('toast');
+                    toast.style.opacity = '1';
+                    setTimeout(() => toast.style.opacity = '0', 1500);
+                };
+                grid.appendChild(card);
             });
-        }
-
-        function createCard(grid, text, label) {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `<span class="label">${label}</span><div class="text">${text}</div>`;
-            card.onclick = () => {
-                navigator.clipboard.writeText(text);
-                const t = document.getElementById('toast');
-                t.style.opacity = '1';
-                setTimeout(() => t.style.opacity = '0', 1500);
-            };
-            grid.appendChild(card);
-        }
-
-        function randomDecor() {
-            const input = document.getElementById('mainInput');
-            if(!input.value) return;
-            const syms = ["𖤍", "々", "〆", "๛", "★", "⚡"];
-            const s = syms[Math.floor(Math.random()*syms.length)];
-            input.value = s + " " + input.value + " " + s;
-            render();
         }
 
         window.onload = () => {
