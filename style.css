@@ -1,88 +1,57 @@
 :root {
-    --bg-color: #0d0b1a;
-    --card-bg: rgba(25, 20, 50, 0.8);
+    --bg: #0d0b1a;
     --neon-blue: #00d2ff;
     --neon-purple: #9d50bb;
-    --text-color: #ffffff;
+    --card: rgba(255, 255, 255, 0.05);
 }
 
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
 body {
-    background-color: var(--bg-color);
-    font-family: 'Cairo', sans-serif;
-    color: var(--text-color);
-    margin: 0; padding: 20px;
-    direction: rtl;
+    background: var(--bg); color: white; margin: 0;
+    font-family: 'Cairo', sans-serif; direction: rtl;
     background-image: radial-gradient(circle at center, #1b1448 0%, #0d0b1a 100%);
     min-height: 100vh;
 }
 
-/* تأثير النجوم المتساقطة في الخلفية */
-.stars-container {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1; background: url('https://www.transparenttextures.com/patterns/stardust.png');
-    opacity: 0.3;
+.container { width: 95%; max-width: 600px; margin: auto; padding: 20px 5px; }
+
+/* Splash Screen */
+#splash-screen {
+    position: fixed; inset: 0; background: var(--bg);
+    display: flex; justify-content: center; align-items: center; z-index: 10000;
 }
+.pulsing { animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-.container { max-width: 600px; margin: auto; }
-
-header { text-align: center; margin-bottom: 30px; }
-.logo-text {
-    font-size: 2.5rem; font-weight: bold;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: #fff; text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-purple);
-}
-.logo-text span { color: var(--neon-blue); }
-
-.main-card {
-    background: var(--card-bg);
-    padding: 20px; border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+/* Quick Add Box */
+.quick-add-box {
+    display: flex; gap: 8px; background: rgba(0,0,0,0.3);
+    padding: 10px; border-radius: 12px; border: 1px dashed var(--neon-purple);
     margin-bottom: 20px;
 }
-.main-card label { display: block; font-size: 0.8rem; color: var(--neon-blue); margin-bottom: 10px; }
+.quick-add-box input { flex: 1; background: none; border: none; color: white; outline: none; }
+.quick-add-box button { background: var(--neon-purple); border: none; padding: 8px 15px; border-radius: 8px; color: white; font-weight: bold; }
 
-#userInput {
-    width: 100%; background: #0a0815; border: 1px solid #332d5e;
-    padding: 15px; border-radius: 10px; color: #fff; font-size: 1.1rem;
-    outline: none; box-sizing: border-box;
-}
-
-.dev-box {
-    background: rgba(45, 20, 80, 0.4);
-    border: 2px dashed var(--neon-purple);
-    padding: 15px; border-radius: 15px; margin-bottom: 25px;
-}
-.dev-header { font-size: 0.9rem; margin-bottom: 10px; text-align: center; color: #ccc; }
-.add-group { display: flex; gap: 10px; }
-.add-group input { flex: 1; background: #000; border: 1px solid #444; padding: 10px; color: #fff; border-radius: 5px; }
-.add-group button { background: var(--neon-purple); border: none; padding: 10px 20px; color: #fff; border-radius: 5px; cursor: pointer; font-weight: bold; }
-
-/* توزيع النتائج مثل الصورة (بطاقتين في كل صف) */
+/* Grid Layout */
 .results-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px; margin-bottom: 30px;
 }
 
 .card {
-    background: linear-gradient(145deg, #1e1a3a, #131129);
-    border: 1px solid rgba(157, 80, 187, 0.3);
-    padding: 15px; border-radius: 12px;
-    position: relative; overflow: hidden;
-    transition: 0.3s;
+    background: var(--card); border: 1px solid rgba(157, 80, 187, 0.2);
+    border-radius: 15px; padding: 15px; position: relative;
+    transition: 0.3s; display: flex; flex-direction: column; align-items: center;
 }
-.card:hover { transform: translateY(-5px); border-color: var(--neon-blue); }
+.card:active { transform: scale(0.95); }
 
-.card-title { font-size: 0.7rem; color: #888; display: flex; justify-content: space-between; margin-bottom: 10px; }
-.card-content { font-size: 1.4rem; font-weight: bold; text-align: center; margin: 15px 0; word-break: break-all; }
+.card-text { font-size: 1.2rem; margin-bottom: 12px; font-weight: bold; word-break: break-all; text-align: center; }
 
-.copy-btn {
-    width: 100%; background: #238636; border: none; color: #fff;
-    padding: 8px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;
-}
-.del-btn { background: #ff4b2b; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+.action-btns { display: flex; gap: 5px; width: 100%; }
+.copy-btn { flex: 3; background: #238636; border: none; color: white; padding: 8px; border-radius: 8px; font-size: 0.8rem; }
+.fav-btn { flex: 1; background: #444; border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.fav-btn.active { background: #e91e63; }
 
-@media (max-width: 480px) {
-    .results-grid { grid-template-columns: 1fr; }
-}
+.section-title { font-size: 0.9rem; color: var(--neon-blue); margin-bottom: 15px; border-right: 3px solid var(--neon-blue); padding-right: 10px; }
+.divider { border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0; }
