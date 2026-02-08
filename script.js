@@ -2,62 +2,65 @@ const userInput = document.getElementById('userInput');
 const resultsBox = document.getElementById('resultsBox');
 const counter = document.getElementById('counter');
 
-// 1. مكتبة خطوط الوورد (للمعاينة)
-const wordFonts = [
-    { name: "خط الوورد: Amiri", family: "'Amiri', serif" },
-    { name: "خط الوورد: Cairo Bold", family: "'Cairo', sans-serif" },
-    { name: "خط الوورد: Tajawal", family: "'Tajawal', sans-serif" },
-    { name: "خط الوورد: Lalezar", family: "'Lalezar', display" },
-    { name: "الخط الكوفي: Reem Kufi", family: "'Reem Kufi', sans-serif" }
+// خريطة تحويل الحروف لنمط اليونيكود الثابت عند النسخ
+const boldItalicMap = {
+    a:'𝒂',b:'𝒃',c:'𝒄',d:'𝒅',e:'𝒆',f:'𝒇',g:'𝒈',h:'𝒉',i:'𝒊',j:'𝒋',k:'𝒌',l:'𝒍',m:'𝒎',n:'𝒏',o:'𝒐',p:'𝒑',q:'𝒒',r:'𝒓',s:'𝒔',t:'𝒕',u:'𝒖',v:'𝒗',w:'𝒘',x:'𝒙',y:'𝒚',z:'𝒛',
+    A:'𝑨',B:'𝑩',C:'𝑪',D:'𝑫',E:'𝑬',F:'𝑭',G:'𝑮',H:'𝑯',I:'𝑰',J:'𝑱',K:'𝑲',L:'𝑳',M:'𝑴',N:'𝑵',O:'𝑶',P:'𝑷',Q:'𝑸',R:'𝑹',S:'𝑺',T:'𝑻',U:'𝑼',V:'𝑽',W:'𝑾',X:'𝑿',Y:'𝒀',Z:'𝒁'
+};
+
+// القوالب الافتراضية النظيفة
+const defaultStyles = [
+    { name: "مخطوطة 1", process: (t) => `࣪ ˖ ໋֢ 𖥻${t}⊹ִ้۪۪ 𖦹 ๋࣭` },
+    { name: "مخطوطة 2", process: (t) => `⏤͟͟͞͞ ${t}` },
+    { name: "مخطوطة 3", process: (t) => `𖤓‌ • 𝑬.𝑺_𝑬𝑰𝒅 |𓍯| 𖡭↠ ${t} 𓆩𓋹𓆪⁩⁩` },
+    { name: "مخطوطة 4", process: (t) => `𓆩𓇢𓆸 ${t} ⁩` }
 ];
 
-// 2. مكتبة الزخارف (للنسخ واللصق في كل مكان)
-const unicodeStyles = [
-    { name: "النمط العريض", map: { a:'𝐚',b:'𝐛',c:'𝐜',d:'𝐝',e:'𝐞',f:'𝐟',g:'𝐠',h:'𝐡',i:'𝐢',j:'𝐣',k:'𝐤',l:'𝐥',m:'𝐦',n:'𝐧',o:'𝐨',p:'𝐩',q:'𝐪',r:'𝐫',s:'𝐬',t:'𝐭',u:'𝐮',v:'𝐯',w:'𝐰',x:'𝐱',y:'𝐲',z:'𝐳'} },
-    { name: "النمط المفرغ", map: { a:'𝕒',b:'𝕓',c:'𝕔',d:'𝕕',e:'𝕖',f:'𝕗',g:'𝕘',h:'𝕙',i:'𝕚',j:'𝕛',k:'𝕜',l:'𝕝',m:'𝕞',n:'𝕟',o:'𝕠',p:'𝕡',q:'𝕢',r:'𝕣',s:'𝕤',t:'𝕥',u:'𝕦',v:'𝕧',w:'𝕨',x:'𝕩',y:'𝕪',z:'𝕫'} },
-    { name: "نمط الدوائر", map: { a:'ⓐ',b:'ⓑ',c:'ⓒ',d:'ⓓ',e:'ⓔ',f:'ⓕ',g:'ⓖ',h:'ⓗ',i:'ⓘ',j:'ⓙ',k:'ⓚ',l:'ⓛ',m:'ⓜ',n:'ⓝ',o:'ⓞ',p:'ⓟ',q:'ⓠ',r:'ⓡ',s:'ⓢ',t:'ⓣ',u:'ⓤ',v:'ⓥ',w:'ⓦ',x:'ⓧ',y:'ⓨ',z:'ⓩ'} },
-    { name: "زخرفة الورود", process: (t) => `✿ ${t} ✿` },
-    { name: "النمط الملكي", process: (t) => `꧁ ${t} ꧂` },
-    { name: "زخرفة التشكيل العربي", process: (t) => t.split('').join('ـ') },
-    { name: "نمط القلوب", process: (t) => `❤️ ${t} ❤️` }
-];
+// استرجاع القوالب التي صممها المستخدم من الذاكرة
+let userTemplates = JSON.parse(localStorage.getItem('myCustomDesigns')) || [];
 
-userInput.addEventListener('input', () => {
-    const text = userInput.value;
-    counter.innerText = `${text.length} حرف`;
-    
-    if (!text.trim()) {
-        resultsBox.innerHTML = '';
+function convertToUnicode(text) {
+    return text.split('').map(char => boldItalicMap[char] || char).join('');
+}
+
+function addNewTemplate() {
+    const input = document.getElementById('customTemplate');
+    if (!input.value.includes("[نص]")) {
+        alert("تنبيه: يجب إضافة الرمز [نص] داخل تصميمك.");
         return;
     }
+    userTemplates.push(input.value);
+    localStorage.setItem('myCustomDesigns', JSON.stringify(userTemplates));
+    input.value = "";
+    updateResults();
+}
 
-    resultsBox.innerHTML = ''; // تنظيف النتائج
+function updateResults() {
+    const text = userInput.value;
+    counter.innerText = `${text.length} حرف`;
+    resultsBox.innerHTML = '';
+    
+    if (!text.trim()) return;
 
-    // دمج وعرض خطوط الوورد
-    wordFonts.forEach(font => {
-        createCard(text, font.name, font.family);
+    const transformed = convertToUnicode(text);
+
+    // عرض القوالب الافتراضية
+    defaultStyles.forEach(style => {
+        createCard(style.process(transformed), style.name);
     });
 
-    // دمج وعرض زخارف اليونيكود
-    unicodeStyles.forEach(style => {
-        let finalOutput = "";
-        if (style.map) {
-            finalOutput = text.toLowerCase().split('').map(char => style.map[char] || char).join('');
-        } else {
-            finalOutput = style.process(text);
-        }
-        createCard(finalOutput, style.name, "");
+    // عرض قوالب المستخدم
+    userTemplates.forEach((temp, i) => {
+        const final = temp.replace("[نص]", transformed);
+        createCard(final, `تصميمك #${i+1}`);
     });
-});
+}
 
-function createCard(text, name, fontFamily) {
+function createCard(text, name) {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-        <div class="font-info">
-            <span class="font-name">${name}</span>
-            <span class="font-preview" style="font-family: ${fontFamily}">${text}</span>
-        </div>
+        <div class="info"><small>${name}</small><div>${text}</div></div>
         <button class="copy-btn" onclick="copyAction('${text}', this)">نسخ</button>
     `;
     resultsBox.appendChild(card);
@@ -65,14 +68,9 @@ function createCard(text, name, fontFamily) {
 
 function copyAction(text, btn) {
     navigator.clipboard.writeText(text);
-    const originalText = btn.innerText;
-    btn.innerText = "تم النسخ!";
-    btn.style.background = "#fff";
-    btn.style.color = "#000";
-    
-    setTimeout(() => {
-        btn.innerText = originalText;
-        btn.style.background = "";
-        btn.style.color = "";
-    }, 1500);
+    btn.innerText = "✅";
+    setTimeout(() => btn.innerText = "نسخ", 1500);
 }
+
+userInput.addEventListener('input', updateResults);
+window.onload = updateResults;
