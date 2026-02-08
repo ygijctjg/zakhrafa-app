@@ -3,29 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zakhrafa Pro | المزخرف المحترف</title>
-    
+    <title>Zakhrafa Dev Pro</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cairo:wght@700&family=Tajawal:wght@500&family=Changa:wght@600&family=Lalezar&family=Reem+Kufi&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#38bdf8">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
         <header>
-            <h1>ZAKHRAFA <span>PRO</span></h1>
-            <p>أفضل أداة لزخرفة النصوص العربية والإنجليزية</p>
+            <h1>ZAKHRAFA <span>DEV</span></h1>
+            <p>صمم زخرفتك الخاصة وزخرف اسمك باحترافية</p>
         </header>
 
-        <div class="input-area">
-            <textarea id="userInput" placeholder="اكتب نصك هنا..."></textarea>
+        <div class="main-card">
+            <input type="text" id="userInput" placeholder="اكتب اسمك هنا (English)...">
             <div id="counter">0 حرف</div>
         </div>
 
-        <div class="results-grid" id="resultsBox">
+        <div class="developer-section">
+            <h3>🛠️ مصنع الزخارف</h3>
+            <p>صمم قالبك الخاص باستخدام الرمز <b>[نص]</b></p>
+            <div class="design-group">
+                <input type="text" id="customTemplate" placeholder="مثال: ꧁ [نص] ꧂">
+                <button onclick="addNewTemplate()" class="btn-add">إضافة</button>
             </div>
+        </div>
+
+        <div id="resultsBox" class="results-grid"></div>
     </div>
 
     <script src="script.js"></script>
